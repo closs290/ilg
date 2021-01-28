@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-ilg-form',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IlgFormComponent implements OnInit {
 
-  constructor() { }
+    interlinearGlossForm = this.formBuilder.group({
+        sourceLanguage: '', // enum/string
+        datasetCitation: '',
+        morphemeGlossMap: new Map<string, string>(),
+        freeTranslation: ''
+    });
 
-  ngOnInit(): void {
-  }
+    constructor(
+        private formBuilder: FormBuilder
+    ) { }
+
+    ngOnInit(): void {
+    }
+
+    onSubmit(): void {
+        console.dir(this.interlinearGlossForm);
+    }
 
 }

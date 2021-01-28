@@ -1,1 +1,49 @@
-<p>ilg-form works!</p>
+<mat-card>
+    <!-- <form [formGroup]="interlinearGlossForm" (ngsubmit)="onSubmit()"> -->
+    <form>
+        <mat-form-field appearance="outline">
+            <mat-label>Source Language</mat-label>
+            <input matInput placeholder="English">
+            <!-- TODO: Change these mat icons to be validator indicators -->
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <mat-hint>Type in language</mat-hint>
+            <!-- TODO: Make this a dropdown that you can also add entries to in future -->
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Dataset Citation</mat-label>
+            <input matInput placeholder="Closson, 2021">
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <mat-hint>Author, Dataset, Year</mat-hint>
+        </mat-form-field>
+
+        <div><!-- TODO: Make this expandable and dynamic -->
+            <mat-form-field appearance="outline">
+                <mat-label>Morph</mat-label>
+                <input matInput placeholder="I">
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <mat-hint>Source language morpheme</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Gloss</mat-label>
+                <input matInput placeholder="1SG">
+                <!-- TODO: add a dropdown with abbreviations from Leipzig -->
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <mat-hint>Target language gloss / single morpheme translation</mat-hint>
+            </mat-form-field>
+        </div>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Free Translation</mat-label>
+            <input matInput placeholder="I">
+            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+            <mat-hint>Natural language translation</mat-hint>
+        </mat-form-field>
+    </form>
+</mat-card>
+
+<p>
+    Recommended citation:
+</p>
+<p>
+    Closson, Reuben M. 2021. Interlinear Gloss Formatting Web Application. Online: http://noURLYet
+</p>
