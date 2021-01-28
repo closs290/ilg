@@ -1,6 +1,5 @@
 <mat-card>
-    <!-- <form [formGroup]="interlinearGlossForm" (ngsubmit)="onSubmit()"> -->
-    <form>
+    <form [formGroup]="interlinearGlossForm" (ngSubmit)="onSubmit()">
         <mat-form-field appearance="outline">
             <mat-label>Source Language</mat-label>
             <input matInput placeholder="English">
@@ -16,7 +15,9 @@
             <mat-hint>Author, Dataset, Year</mat-hint>
         </mat-form-field>
 
-        <div><!-- TODO: Make this expandable and dynamic -->
+        <br>
+
+        <span><!-- TODO: Make this expandable and dynamic -->
             <mat-form-field appearance="outline">
                 <mat-label>Morph</mat-label>
                 <input matInput placeholder="I">
@@ -30,7 +31,9 @@
                 <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
                 <mat-hint>Target language gloss / single morpheme translation</mat-hint>
             </mat-form-field>
-        </div>
+        </span>
+
+        <br>
 
         <mat-form-field appearance="outline">
             <mat-label>Free Translation</mat-label>
@@ -38,6 +41,8 @@
             <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
             <mat-hint>Natural language translation</mat-hint>
         </mat-form-field>
+
+        <button mat-flat-button color="primary" type="submit">Submit</button>
     </form>
 </mat-card>
 

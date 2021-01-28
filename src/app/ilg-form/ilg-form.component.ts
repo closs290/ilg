@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-ilg-form',
@@ -8,22 +9,31 @@ import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 })
 export class IlgFormComponent implements OnInit {
 
-    interlinearGlossForm = this.formBuilder.group({
-        sourceLanguage: '', // enum/string
-        datasetCitation: '',
-        morphemeGlossMap: new Map<string, string>(),
-        freeTranslation: ''
-    });
+    interlinearGlossForm: FormGroup;
 
     constructor(
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private _snackBar: MatSnackBar
     ) { }
 
     ngOnInit(): void {
+        this.interlinearGlossForm = this.formBuilder.group({
+            sourceLanguage: '', // enum/string
+            datasetCitation: '',
+            morphemeGlossMap: new Map<string, string>(),
+            freeTranslation: ''
+        });
     }
 
     onSubmit(): void {
         console.dir(this.interlinearGlossForm);
+        this.giveUserSuccessResponse();
     }
+
+    giveUserSuccessResponse() {
+        this._snackBar.open("Interlinear gloss entered", "OK", {
+            duration: 10000
+        })
+    };
 
 }

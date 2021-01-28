@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // ILG
 import { AppRoutingModule } from './app-routing.module';
@@ -33,6 +34,7 @@ import { IPAKeyboardComponent } from './ipa-keyboard/ipa-keyboard.component';
         MatCardModule,
         MatSliderModule,
         MatInputModule,
+        MatSnackBarModule,
         StoreModule.forRoot({}, {})
     ],
     providers: [ ],
