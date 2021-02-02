@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -14,19 +14,36 @@ export class IlgFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private _snackBar: MatSnackBar
-    ) { }
-
-    ngOnInit(): void {
+    ) { 
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', // enum/string
             datasetCitation: '',
-            morphemeGlossMap: new Map<string, string>(),
+            morphemeGlossMap: this.formBuilder.array([]),
             freeTranslation: ''
-        });
+        }); //test
+    }
+
+    ngOnInit(): void {
+        this.addPair();
+    }
+
+    morphs(): FormArray {
+        return this.interlinearGlossForm.get("morphemeGlossMap") as FormArray;
+    }
+
+    addPair(): void {
+        this.morphs().push(this.newMorphGlossPair());
+    }
+
+    newMorphGlossPair(): FormGroup {
+        return this.formBuilder.group({
+            morph: '',
+            gloss: ''
+        })
     }
 
     onSubmit(): void {
-        console.dir(this.interlinearGlossForm);
+        console.dir(this.interlinearGlossForm.value);
         this.giveUserSuccessResponse();
     }
 

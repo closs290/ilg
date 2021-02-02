@@ -17,21 +17,40 @@
 
         <br>
 
-        <span><!-- TODO: Make this expandable and dynamic -->
-            <mat-form-field appearance="outline">
-                <mat-label>Morph</mat-label>
-                <input matInput placeholder="I">
+        <!--mat-card> TODO: Make this expandable and dynamic -->
+            <!-- <mat-form-field appearance="outline"> -->
+                <!-- <mat-label>Morph</mat-label> -->
+                <!-- <input matInput placeholder="I"> -->
                 <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                <mat-hint>Source language morpheme</mat-hint>
-            </mat-form-field>
-            <mat-form-field appearance="outline">
-                <mat-label>Gloss</mat-label>
-                <input matInput placeholder="1SG">
+                <!-- <mat-hint>Source language morpheme</mat-hint> -->
+            <!-- </mat-form-field> -->
+            <!-- <mat-form-field appearance="outline"> -->
+                <!-- <mat-label>Gloss</mat-label> -->
+                <!-- <input matInput placeholder="1SG"> -->
                 <!-- TODO: add a dropdown with abbreviations from Leipzig -->
                 <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                <mat-hint>Target language gloss / single morpheme translation</mat-hint>
-            </mat-form-field>
-        </span>
+                <!-- <mat-hint>Target language gloss / single morpheme translation</mat-hint> -->
+            <!-- </mat-form-field> -->
+        <!-- </mat-card> -->
+
+        <table formArrayName="morphemeGlossMap">
+            <tr>
+                <th>Morphemes</th>
+                <th>Glosses</th>
+                <th><button type="button" (click)="addPair()">+</button></th>
+            </tr>
+            <tr *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
+                <td>
+                    <mat-label>Morph</mat-label>
+                    <input type="text" formControlName="morph"/>
+                </td>
+                <td>
+                    <mat-label>Gloss</mat-label>
+                    <input type="text" formControlName="gloss"/>
+                </td>
+                <td></td>
+            </tr>
+        </table>
 
         <br>
 
@@ -50,5 +69,5 @@
     Recommended citation:
 </p>
 <p>
-    Closson, Reuben M. 2021. Interlinear Gloss Formatting Web Application. Online: http://noURLYet
+    Closson, Reuben M. 2021. Interlinear Gloss Formatting Web Application. Online: http://ilg.closson.tech
 </p>
