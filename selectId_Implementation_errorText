@@ -1,0 +1,9 @@
+ngrx-entity.js:155 @ngrx/entity: The entity passed to the `selectId` implementation returned undefined. You should probably provide your own `selectId` implementation. The entity that was passed: 
+{language: "French", datasetAuthor: "Charlemagne, 1066", year: "Charlemagne, 1066", phrases: Array(0), freeTranslation: "This is a translation"}
+datasetAuthor: "Charlemagne, 1066"
+freeTranslation: "This is a translation"
+language: "French"
+phrases: Array(0)
+length: 0
+__proto__: Array(0)
+year: "Charlemagne, 1066"

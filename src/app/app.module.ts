@@ -17,6 +17,7 @@ import { StoreModule } from '@ngrx/store';
 import { IlgFormComponent } from './ilg-form/ilg-form.component';
 import { IlgCollectionComponent } from './ilg-collection/ilg-collection.component';
 import { IPAKeyboardComponent } from './ipa-keyboard/ipa-keyboard.component';
+import { ilgReducer } from './ilg-store/ilg.reducer';
 
 @NgModule({
     declarations: [
@@ -35,7 +36,7 @@ import { IPAKeyboardComponent } from './ipa-keyboard/ipa-keyboard.component';
         MatSliderModule,
         MatInputModule,
         MatSnackBarModule,
-        StoreModule.forRoot({}, {})
+        StoreModule.forRoot({ilgs: ilgReducer})
     ],
     providers: [ ],
     bootstrap: [AppComponent]

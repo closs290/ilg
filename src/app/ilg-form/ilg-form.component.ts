@@ -1,6 +1,14 @@
+// Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+
+// NGRX
+import { Store } from '@ngrx/store';
+
+// ILG
+import { createInterlinearText } from '../ilg-store/ilg.actions';
+import { InterlinearGloss } from '../ilg-store/ilg.reducer';
 
 @Component({
   selector: 'app-ilg-form',
@@ -13,6 +21,7 @@ export class IlgFormComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
+        private store: Store,
         private _snackBar: MatSnackBar
     ) { 
         this.interlinearGlossForm = this.formBuilder.group({
@@ -44,6 +53,14 @@ export class IlgFormComponent implements OnInit {
 
     onSubmit(): void {
         console.dir(this.interlinearGlossForm.value);
+        const newIlg = {
+            language: this.interlinearGlossForm.value.sourceLanguage,
+            datasetAuthor: this.interlinearGlossForm.value.datasetCitation,
+            year: this.interlinearGlossForm.value.datasetCitation,
+            phrases: [], // TODO: transform form entry to 'phrase' type
+            freeTranslation: this.interlinearGlossForm.value.freeTranslation
+        } as InterlinearGloss;
+        this.store.dispatch(createInterlinearText({ ilg: newIlg }));
         this.giveUserSuccessResponse();
     }
 
