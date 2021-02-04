@@ -25,11 +25,11 @@ export interface phrase {
 
 export interface InterlinearGloss {
     language: string,
-    datasetAuthor: string,
-    year: number,
+    citation: string, //*
     phrases: phrase[]
     freeTranslation: string
 }
+// * ToDo: Find a citation standard and reference it
 
 export interface InterlinearTextState extends EntityState<InterlinearGloss> {
     // selectedTextId: number;
@@ -49,3 +49,6 @@ export const ilgReducer = createReducer(
     on(updateInterlinearText, (state, props) => adapter.updateOne(props.update, state)),
     on(deleteInterlinearText, (state, props) => adapter.removeOne(props.ilgId, initialState))
 );
+
+// ToDo: Create entity library of known languages
+// ToDo: Create entity library of known citations
