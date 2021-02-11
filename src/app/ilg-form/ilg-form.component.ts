@@ -23,16 +23,16 @@ export class IlgFormComponent implements OnInit {
         private formBuilder: FormBuilder,
         private store: Store,
         private _snackBar: MatSnackBar
-    ) { 
+    ) { }
+
+    ngOnInit(): void {
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', // enum/string
             datasetCitation: '',
             morphemeGlossMap: this.formBuilder.array([]),
             freeTranslation: ''
         }); 
-    }
 
-    ngOnInit(): void {
         this.addPair();
     }
 

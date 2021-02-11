@@ -13,7 +13,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
   declarations: [],
   imports: [
     CommonModule,
-    FormBuilder
+    FormBuilder,
+    ReactiveFormsModule
   ]
 })
 export class IlgFormModule { }
