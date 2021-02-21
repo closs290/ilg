@@ -1,76 +1,93 @@
+<div class="flex-container">
+    <mat-card class="gloss-form-card">
+        <form [formGroup]="interlinearGlossForm" (ngSubmit)="onSubmit()" class=gloss-form>
+            <mat-form-field appearance="outline" class="language">
+                <mat-label>Source Language</mat-label>
+                <input matInput placeholder="English" formControlName="sourceLanguage">
+                <!-- TODO: Change these mat icons to be validator indicators -->
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <mat-hint>Type in language</mat-hint>
+                <!-- TODO: Make this a dropdown that you can also add entries to in future -->
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="dataset">
+                <mat-label>Dataset</mat-label>
+                <input matInput placeholder="Closson" formControlName="datasetCitation">
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <mat-hint>Author, Dataset</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="year">
+                <mat-label>Citation Year</mat-label>
+                <input matInput placeholder="2021" formControlName="year">
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <mat-hint>Year</mat-hint>
+            </mat-form-field>
+    
+            <br>
+    
+            <!--mat-card> TODO: Make this expandable and dynamic -->
+                <!-- <mat-form-field appearance="outline"> -->
+                    <!-- <mat-label>Morph</mat-label> -->
+                    <!-- <input matInput placeholder="I"> -->
+                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <!-- <mat-hint>Source language morpheme</mat-hint> -->
+                <!-- </mat-form-field> -->
+                <!-- <mat-form-field appearance="outline"> -->
+                    <!-- <mat-label>Gloss</mat-label> -->
+                    <!-- <input matInput placeholder="1SG"> -->
+                    <!-- TODO: add a dropdown with abbreviations from Leipzig -->
+                    <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                    <!-- <mat-hint>Target language gloss / single morpheme translation</mat-hint> -->
+                <!-- </mat-form-field> -->
+            <!-- </mat-card> -->
+    
+            <table formArrayName="morphemeGlossMap">
+                <tr>
+                    <th>Morphemes</th>
+                    <th>Glosses</th>
+                    <th>
+                        <button mat-mini-fab type="button" (click)="addPair()">
+                        <!-- TODO: use <mat-icon /> -->
+                            +
+                        </button>
+                    </th>
+                </tr>
+                <tr *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
+                    <td>
+                        <mat-label>Morph</mat-label>
+                        <input type="text" formControlName="morph{{i}}" class="morphs"/>
+                    </td>
+                    <td>
+                        <mat-label>Gloss</mat-label>
+                        <input type="text" formControlName="gloss{{i}}" class="glosses"/>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+    
+            <br>
+    
+            <mat-form-field appearance="outline" class="freeTranslation">
+                <mat-label>Free Translation</mat-label>
+                <input matInput placeholder="I" formControlName="freeTranslation">
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <mat-hint>Natural language translation</mat-hint>
+            </mat-form-field>
+    
+            <button mat-flat-button color="primary" type="submit">Submit</button>
+        </form>
+    </mat-card>
+    
+    
+</div>
+
 <mat-card>
-    <form [formGroup]="interlinearGlossForm" (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="outline">
-            <mat-label>Source Language</mat-label>
-            <input matInput placeholder="English" formControlName="sourceLanguage">
-            <!-- TODO: Change these mat icons to be validator indicators -->
-            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-            <mat-hint>Type in language</mat-hint>
-            <!-- TODO: Make this a dropdown that you can also add entries to in future -->
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Dataset Citation</mat-label>
-            <input matInput placeholder="Closson, 2021" formControlName="datasetCitation">
-            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-            <mat-hint>Author, Dataset, Year</mat-hint>
-        </mat-form-field>
-
-        <br>
-
-        <!--mat-card> TODO: Make this expandable and dynamic -->
-            <!-- <mat-form-field appearance="outline"> -->
-                <!-- <mat-label>Morph</mat-label> -->
-                <!-- <input matInput placeholder="I"> -->
-                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                <!-- <mat-hint>Source language morpheme</mat-hint> -->
-            <!-- </mat-form-field> -->
-            <!-- <mat-form-field appearance="outline"> -->
-                <!-- <mat-label>Gloss</mat-label> -->
-                <!-- <input matInput placeholder="1SG"> -->
-                <!-- TODO: add a dropdown with abbreviations from Leipzig -->
-                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                <!-- <mat-hint>Target language gloss / single morpheme translation</mat-hint> -->
-            <!-- </mat-form-field> -->
-        <!-- </mat-card> -->
-
-        <table formArrayName="morphemeGlossMap">
-            <tr>
-                <th>Morphemes</th>
-                <th>Glosses</th>
-                <th><button type="button" (click)="addPair()">+</button></th>
-            </tr>
-            <tr *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
-                <td>
-                    <mat-label>Morph</mat-label>
-                    <input type="text" formControlName="morph"/>
-                </td>
-                <td>
-                    <mat-label>Gloss</mat-label>
-                    <input type="text" formControlName="gloss"/>
-                </td>
-                <td></td>
-            </tr>
-        </table>
-
-        <br>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Free Translation</mat-label>
-            <input matInput placeholder="I" formControlName="freeTranslation">
-            <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-            <mat-hint>Natural language translation</mat-hint>
-        </mat-form-field>
-
-        <button mat-flat-button color="primary" type="submit">Submit</button>
-    </form>
+    <h3>Interlinear Gloss:</h3>
+    {{this.interlinearGlossForm.value | json}}
+    
+    <p>
+        Recommended citation:
+    </p>
+    <p>
+        Closson, Reuben M. 2021. Interlinear Gloss Formatting Web Application. Online: http://ilg.closson.tech
+    </p>
 </mat-card>
-
-<h3>Interlinear Gloss:</h3>
-{{this.interlinearGlossForm.value | json}}
-
-<p>
-    Recommended citation:
-</p>
-<p>
-    Closson, Reuben M. 2021. Interlinear Gloss Formatting Web Application. Online: http://ilg.closson.tech
-</p>

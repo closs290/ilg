@@ -10,6 +10,8 @@ from './ilg.actions';
 // ToDo: Look into using let morphemeGlossMap = new Map();
 // morphemeGlossMap.set('myMorpheme', 'myGloss');
 
+// Array of strings for gloss intentional,
+// since a single morpheme may have multiple glosses
 export interface morphemeGlossMap {
     morpheme: string,
     gloss: string[]

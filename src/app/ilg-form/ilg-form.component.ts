@@ -8,7 +8,12 @@ import { Store } from '@ngrx/store';
 
 // ILG
 import { createInterlinearText } from '../ilg-store/ilg.actions';
-import { InterlinearGloss } from '../ilg-store/ilg.reducer';
+import { 
+    InterlinearGloss, 
+    phrase, 
+    morphemeGlossMap, 
+    InterlinearTextState } 
+from '../ilg-store/ilg.reducer';
 
 @Component({
   selector: 'app-ilg-form',
@@ -21,13 +26,14 @@ export class IlgFormComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store: Store,
+        private store: Store<InterlinearTextState>,
         private _snackBar: MatSnackBar
     ) { 
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', // enum/string
-            datasetCitation: '',
-            morphemeGlossMap: this.formBuilder.array([]),
+            datasetAuthor: '',
+            year: '',
+            morphGlossMap: this.formBuilder.array([]),
             freeTranslation: ''
         }); //test
     }
@@ -36,19 +42,19 @@ export class IlgFormComponent implements OnInit {
         this.addPair();
     }
 
-    morphs(): FormArray {
-        return this.interlinearGlossForm.get("morphemeGlossMap") as FormArray;
-    }
-
     addPair(): void {
         this.morphs().push(this.newMorphGlossPair());
     }
 
     newMorphGlossPair(): FormGroup {
         return this.formBuilder.group({
-            morph: '',
-            gloss: ''
-        })
+            morpheme: '',
+            gloss: ['']
+        } as morphemeGlossMap)
+    }
+
+    morphs(): FormArray {
+        return this.interlinearGlossForm.get("morphemeGlossMap") as FormArray;
     }
 
     onSubmit(): void {
@@ -57,7 +63,7 @@ export class IlgFormComponent implements OnInit {
             language: this.interlinearGlossForm.value.sourceLanguage,
             datasetAuthor: this.interlinearGlossForm.value.datasetCitation,
             year: this.interlinearGlossForm.value.datasetCitation,
-            phrases: [], // TODO: transform form entry to 'phrase' type
+            phrases: this.interlinearGlossForm.value.morphGlossMap,
             freeTranslation: this.interlinearGlossForm.value.freeTranslation
         } as InterlinearGloss;
         this.store.dispatch(createInterlinearText({ ilg: newIlg }));
