@@ -9,12 +9,28 @@
 
     .gloss-form-card {
         .gloss-form {
-            .language {}
-            .dataset {}
-            .year {}
-            .morphs {}
-            .glosses {}
-            .freeTranslation{}
+            .language {
+                order: 1;
+                // align-self: flex-start;
+            }
+            .dataset {
+                order: 2;
+            }
+            .year {
+                order: 3;
+            }
+            .morphs {
+                order: 4;
+                align-self: flex-start;
+            }
+            .glosses {
+                order: 4;
+                align-self: flex-end;
+            }
+            .freeTranslation{
+                order: 5;
+                // align-self: flex-end;
+            }
         }
     }
 }
