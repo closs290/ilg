@@ -1,14 +1,20 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 // NGRX
 import { Store } from '@ngrx/store';
 
+//RXJS
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
+
 // ILG
 import { createInterlinearText } from '../ilg-store/ilg.actions';
 import { InterlinearGloss } from '../ilg-store/ilg.reducer';
+import { LANGUAGES } from './languages';
+import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses';
 
 @Component({
   selector: 'app-ilg-form',
@@ -18,6 +24,11 @@ import { InterlinearGloss } from '../ilg-store/ilg.reducer';
 export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
+    languageOptions: string[] = [...LANGUAGES];
+    glossOptions: standardAbbreviation[] = [...LIST_OF_STANDARD_ABBREVIATIONS];
+    languages: Observable<string[]>;
+    glosses: Observable<standardAbbreviation[]>;
+    autoCompleteControl = new FormControl();
 
     constructor(
         private formBuilder: FormBuilder,
@@ -34,6 +45,24 @@ export class IlgFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.addPair();
+        this.languages = this.autoCompleteControl.valueChanges.pipe(
+            startWith(''),
+            map((currentLanguage: string) => this._filterLanguages(currentLanguage))
+        );
+        this.glosses = this.autoCompleteControl.valueChanges.pipe(
+            startWith(''),
+            map((currentGloss: standardAbbreviation) => currentGloss ? this._filterGlosses(currentGloss) : LIST_OF_STANDARD_ABBREVIATIONS.slice())
+        );
+    }
+
+    _filterLanguages(value: string): string[] {
+        const filterValue = value.toLowerCase();
+        return this.languageOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    }
+
+    _filterGlosses(value: standardAbbreviation): standardAbbreviation[] {
+        const filterValue = value.abbreviation.toLowerCase();
+        return this.glossOptions.filter(option => option.abbreviation.toLowerCase().indexOf(filterValue) === 0);
     }
 
     morphs(): FormArray {

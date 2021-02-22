@@ -9,6 +9,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 // ILG
 import { AppRoutingModule } from './app-routing.module';
@@ -36,6 +37,7 @@ import { ilgReducer } from './ilg-store/ilg.reducer';
         MatSliderModule,
         MatInputModule,
         MatSnackBarModule,
+        MatAutocompleteModule,
         StoreModule.forRoot({ilgs: ilgReducer})
     ],
     providers: [ ],
