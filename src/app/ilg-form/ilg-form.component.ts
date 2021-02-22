@@ -26,7 +26,7 @@ export class IlgFormComponent implements OnInit {
 
     constructor(
         private formBuilder: FormBuilder,
-        private store: Store<InterlinearTextState>,
+        private store: Store, // I think I need to initialize a state?
         private _snackBar: MatSnackBar
     ) { 
         this.interlinearGlossForm = this.formBuilder.group({
@@ -38,9 +38,7 @@ export class IlgFormComponent implements OnInit {
         }); //test
     }
 
-    ngOnInit(): void {
-        this.addPair();
-    }
+    ngOnInit(): void {}
 
     addPair(): void {
         this.morphs().push(this.newMorphGlossPair());
@@ -54,7 +52,7 @@ export class IlgFormComponent implements OnInit {
     }
 
     morphs(): FormArray {
-        return this.interlinearGlossForm.get("morphemeGlossMap") as FormArray;
+        return new FormArray([]) || this.interlinearGlossForm.get("morphemeGlossMap") as FormArray;
     }
 
     onSubmit(): void {
