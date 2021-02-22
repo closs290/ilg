@@ -1,0 +1,20 @@
+.flex-container {
+    display: flex;
+    // flex-direction: column;
+    // flex-wrap: wrap;
+    // flex-flow: column wrap;
+    // justify-content: flex-start;
+    // align-items: flex-start;
+    // align-content: flex-start;
+
+    .gloss-form-card {
+        .gloss-form {
+            .language {}
+            .dataset {}
+            .year {}
+            .morphs {}
+            .glosses {}
+            .freeTranslation{}
+        }
+    }
+}

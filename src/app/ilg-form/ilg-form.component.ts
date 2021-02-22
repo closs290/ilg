@@ -48,7 +48,7 @@ export class IlgFormComponent implements OnInit {
         return this.formBuilder.group({
             morph: '',
             gloss: ''
-        })
+        });
     }
 
     onSubmit(): void {
