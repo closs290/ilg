@@ -38,6 +38,7 @@ export class IlgFormComponent implements OnInit {
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', // enum/string
             datasetCitation: '',
+            year: '',
             morphemeGlossMap: this.formBuilder.array([]),
             freeTranslation: ''
         }); //test
@@ -49,6 +50,8 @@ export class IlgFormComponent implements OnInit {
             startWith(''),
             map((currentLanguage: string) => this._filterLanguages(currentLanguage))
         );
+
+        // In future: categorize: https://stackblitz.com/angular/gggyoobpvmx?file=src%2Fapp%2Fautocomplete-optgroup-example.ts 
         this.glosses = this.autoCompleteControl.valueChanges.pipe(
             startWith(''),
             map((currentGloss: standardAbbreviation) => currentGloss ? this._filterGlosses(currentGloss) : LIST_OF_STANDARD_ABBREVIATIONS.slice())
@@ -85,7 +88,7 @@ export class IlgFormComponent implements OnInit {
         const newIlg = {
             language: this.interlinearGlossForm.value.sourceLanguage,
             datasetAuthor: this.interlinearGlossForm.value.datasetCitation,
-            year: this.interlinearGlossForm.value.datasetCitation,
+            year: this.interlinearGlossForm.value.year,
             phrases: [], // TODO: transform form entry to 'phrase' type
             freeTranslation: this.interlinearGlossForm.value.freeTranslation
         } as InterlinearGloss;

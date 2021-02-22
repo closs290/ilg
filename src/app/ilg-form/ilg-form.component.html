@@ -1,5 +1,6 @@
 <div class="flex-container">
     <mat-card class="gloss-form-card">
+        <mat-card-title>Create an interlinear text:</mat-card-title>
         <form [formGroup]="interlinearGlossForm" (ngSubmit)="onSubmit()" class="gloss-form">
             <mat-form-field appearance="outline" class="language">
                 <mat-label>Source Language</mat-label>
@@ -19,34 +20,42 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="dataset">
                 <mat-label>Dataset Citation</mat-label>
-                <input matInput placeholder="Closson, 2021" formControlName="datasetCitation">
+                <input matInput placeholder="Closson" formControlName="datasetCitation">
                 <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
-                <mat-hint>Author, Dataset, Year</mat-hint>
+                <mat-hint>Author, Dataset</mat-hint>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="year">
+                <mat-label>Year</mat-label>
+                <input matInput placeholder="2021" formControlName="year">
+                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
+                <mat-hint>Dataset year</mat-hint>
             </mat-form-field>
     
-            <br>
+            <br> <br>
 
-            <mat-card>
+            <mat-card class="morpheme-gloss-pairs">
                 <table formArrayName="morphemeGlossMap">
                     <tr>
-                        <th>Morphemes</th>
-                        <th>Glosses</th>
-                        <th rowspan="2"><button type="button" (click)="addPair()">+</button></th>
-                    </tr>
-                    <tr *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
-                        <td>
-                            <mat-form-field appearance="outline" class="morpheme{{i}}">
+                        <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
+                            <!--{{i}}-->
+                            <mat-form-field appearance="outline" class="morpheme" id="morpheme{{i}}">
                                 <mat-label>Morph</mat-label>
                                 <input matInput formControlName="morph"
                                                 type="text"
                                                 placeholder="I"
                                                 class="morphs"/>
-                                <mat-hint>Source language morpheme</mat-hint>
+                                <!-- <mat-hint>Source language morpheme</mat-hint> -->
                             </mat-form-field>
-                            
                         </td>
                         <td>
-                            <mat-form-field appearance="outline" class="gloss{{i}}">
+                            <button mat-mini-fab color="primary" type="button" (click)="addPair()">
+                                <mat-icon>add</mat-icon>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
+                            <mat-form-field appearance="outline" class="gloss" id="gloss{{i}}">
                                 <mat-label>Gloss</mat-label>
                                 <!-- TODO: add a dropdown with abbreviations from Leipzig -->
                                 <input matInput formControlName="gloss"
@@ -60,10 +69,9 @@
                                         {{gloss.abbreviation}}: {{gloss.full}}
                                     </mat-option>
                                 </mat-autocomplete>
-                                <mat-hint>Target language single-morpheme translation</mat-hint>
+                                <!-- <mat-hint>Target language single-morpheme translation</mat-hint> -->
                             </mat-form-field>
                         </td>
-                        <!-- Blank cell when you don't have rowspan=2 for button <td></td>-->
                     </tr>
                 </table>
             </mat-card>
@@ -76,7 +84,7 @@
                 <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
                 <mat-hint>Natural language translation</mat-hint>
             </mat-form-field>
-    
+            <br><br><br>
             <button mat-flat-button color="primary" type="submit">Submit</button>
         </form>
     </mat-card>
@@ -85,6 +93,30 @@
 <mat-card>
     <h3>Current Interlinear Gloss Datamodel:</h3>
     {{this.interlinearGlossForm.value | json}}
+
+    <br> <br> <br>
+
+    <table>
+        <tr>
+            <th>Language</th>
+            <th>Author/Dataset</th>
+            <th>Year</th>
+        </tr>
+        <tr>
+            <!-- *ngFor="morph of morphemes | async"; maybe start tying into entity model? -->
+            <td>
+                Morpheme
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Gloss
+            </td>
+        </tr>
+        <tr>
+            <td>Translation</td>
+        </tr>
+    </table>
 
     <br> <br>
     <p>

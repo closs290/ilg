@@ -5,11 +5,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Materials
-import { MatSliderModule } from '@angular/material/slider';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 // ILG
 import { AppRoutingModule } from './app-routing.module';
@@ -38,6 +40,8 @@ import { ilgReducer } from './ilg-store/ilg.reducer';
         MatInputModule,
         MatSnackBarModule,
         MatAutocompleteModule,
+        MatButtonModule,
+        MatIconModule,
         StoreModule.forRoot({ilgs: ilgReducer})
     ],
     providers: [ ],
