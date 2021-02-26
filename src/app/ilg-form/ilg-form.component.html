@@ -106,12 +106,12 @@
         <tr>
             <!-- *ngFor="morph of morphemes | async"; maybe start tying into entity model? -->
             <td *ngFor="pair of morphs | keys">
-                {{pair.morph}}
+                {{mgPairs().morpheme}}
             </td>
         </tr>
         <tr>
             <td *ngFor="pair of morphs | keys">
-                {{pair.gloss}}
+                {{mgPairs().gloss}}
             </td>
         </tr>
         <tr>

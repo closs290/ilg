@@ -12,7 +12,7 @@ import { map, startWith } from 'rxjs/operators';
 
 // ILG
 import { createInterlinearText } from '../ilg-store/ilg.actions';
-import { InterlinearGloss } from '../ilg-store/ilg.reducer';
+import { InterlinearGloss, morphemeGlossMap } from '../ilg-store/ilg.reducer';
 import { LANGUAGES } from './languages';
 import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses';
 
@@ -57,6 +57,15 @@ export class IlgFormComponent implements OnInit {
             map((currentGloss: standardAbbreviation) => currentGloss ? this._filterGlosses(currentGloss) : LIST_OF_STANDARD_ABBREVIATIONS.slice())
         );
     }
+
+    mgPairs(): morphemeGlossMap[] {
+        return this.interlinearGlossForm.value.morphemeGlossMap.map((thing) => {
+            return {
+                morpheme: thing.morph,
+                gloss: thing.gloss
+            };
+        })
+    };
 
     _filterLanguages(value: string): string[] {
         const filterValue = value.toLowerCase();
