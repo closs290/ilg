@@ -96,25 +96,26 @@
 
     <br> <br> <br>
 
+    <h3>Current Interlinear Gloss:</h3>
     <table>
         <tr>
-            <th>Language</th>
-            <th>Author/Dataset</th>
-            <th>Year</th>
+            <th>{{this.interlinearGlossForm.value.sourceLanguage}}</th>
+            <th>{{this.interlinearGlossForm.value.datasetCitation}}, </th>
+            <th>{{this.interlinearGlossForm.value.year}}</th>
         </tr>
         <tr>
             <!-- *ngFor="morph of morphemes | async"; maybe start tying into entity model? -->
-            <td>
-                Morpheme
+            <td *ngFor="pair of morphs | keys">
+                {{pair.morph}}
             </td>
         </tr>
         <tr>
-            <td>
-                Gloss
+            <td *ngFor="pair of morphs | keys">
+                {{pair.gloss}}
             </td>
         </tr>
         <tr>
-            <td>Translation</td>
+            <td>Translation: {{this.interlinearGlossForm.value.freeTranslation}}</td>
         </tr>
     </table>
 
