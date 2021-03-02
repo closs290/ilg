@@ -1,5 +1,5 @@
 // Angular
-import { NgModule, PipeTransform, Pipe } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { KeysPipe } from './ilg-form.component';
+import { KeysPipe } from './keys.pipe';
 
 @NgModule({
   exports: [

@@ -102,15 +102,16 @@
             <th>{{this.interlinearGlossForm.value.sourceLanguage}}</th>
             <th>{{this.interlinearGlossForm.value.datasetCitation}}, </th>
             <th>{{this.interlinearGlossForm.value.year}}</th>
+            <th> test</th>
         </tr>
         <tr>
             <!-- *ngFor="morph of morphemes | async"; maybe start tying into entity model? -->
-            <td *ngFor="pair of morphs | keys">
+            <td *ngFor="let pair of morphs | keys">
                 {{mgPairs().morpheme}}
             </td>
         </tr>
         <tr>
-            <td *ngFor="pair of morphs | keys">
+            <td *ngFor="let pair of morphs | keys">
                 {{mgPairs().gloss}}
             </td>
         </tr>

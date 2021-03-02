@@ -1,5 +1,5 @@
 // Angular
-import { Component, OnInit, PipeTransform, Pipe } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -7,10 +7,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 
 //RXJS
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
 // ILG
+import { InterlinearGlossService } from '../interlinear-gloss.service';
 import { createInterlinearText } from '../ilg-store/ilg.actions';
 import { InterlinearGloss, morphemeGlossMap } from '../ilg-store/ilg.reducer';
 import { LANGUAGES } from './languages';
@@ -22,6 +23,8 @@ import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses'
   styleUrls: ['./ilg-form.component.scss']
 })
 export class IlgFormComponent implements OnInit {
+
+    glossService: InterlinearGlossService;
 
     interlinearGlossForm: FormGroup;
     languageOptions: string[] = [...LANGUAGES];
@@ -35,6 +38,13 @@ export class IlgFormComponent implements OnInit {
         private store: Store,
         private _snackBar: MatSnackBar
     ) { 
+        this.glossService.InterlinearGlossBank.next([{
+            language: '',
+            datasetAuthor: '',
+            year: 0,
+            phrases: [],
+            freeTranslation: ''
+          } as InterlinearGloss]);
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', // enum/string
             datasetCitation: '',
@@ -98,10 +108,13 @@ export class IlgFormComponent implements OnInit {
             language: this.interlinearGlossForm.value.sourceLanguage,
             datasetAuthor: this.interlinearGlossForm.value.datasetCitation,
             year: this.interlinearGlossForm.value.year,
-            phrases: [], // TODO: transform form entry to 'phrase' type
+            phrases: this.interlinearGlossForm.value.morphemeGlossMap, // TODO: transform form entry to 'phrase' type
             freeTranslation: this.interlinearGlossForm.value.freeTranslation
         } as InterlinearGloss;
-        this.store.dispatch(createInterlinearText({ ilg: newIlg }));
+
+        this.glossService.InterlinearGlossBank.next([this.glossService.InterlinearGlossBank.value, newIlg]);
+
+        // this.store.dispatch(createInterlinearText({ ilg: newIlg }));
         this.giveUserSuccessResponse();
     }
 
@@ -111,15 +124,4 @@ export class IlgFormComponent implements OnInit {
         })
     };
 
-}
-
-@Pipe({name: 'keys'})
-export class KeysPipe implements PipeTransform {
-  transform(value, args:string[]) : any {
-    let keys = [];
-    for (let key in value) {
-      keys.push(key);
-    }
-    return keys;
-  }
 }

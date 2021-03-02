@@ -21,13 +21,15 @@ import { IlgFormComponent } from './ilg-form/ilg-form.component';
 import { IlgCollectionComponent } from './ilg-collection/ilg-collection.component';
 import { IPAKeyboardComponent } from './ipa-keyboard/ipa-keyboard.component';
 import { ilgReducer } from './ilg-store/ilg.reducer';
+import { KeysPipe } from './ilg-form/keys.pipe';
 
 @NgModule({
     declarations: [
         AppComponent,
         IlgFormComponent,
         IlgCollectionComponent,
-        IPAKeyboardComponent
+        IPAKeyboardComponent,
+        KeysPipe
     ],
     imports: [
         BrowserModule,
