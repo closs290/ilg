@@ -9,6 +9,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
+import { KeysPipe } from './keys.pipe';
+
 @NgModule({
   exports: [
     MatAutocompleteModule,
@@ -16,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     MatIconModule
   ],
-  declarations: [],
+  declarations: [ KeysPipe ],
   imports: [
     CommonModule,
     FormBuilder

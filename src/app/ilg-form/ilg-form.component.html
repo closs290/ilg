@@ -91,38 +91,26 @@
 </div>
 
 <mat-card>
-    <h3>Current Interlinear Gloss Datamodel:</h3>
-    {{this.interlinearGlossForm.value | json}}
+    <!-- <h3>Current Interlinear Gloss Datamodel:</h3>
+    {{this.interlinearGlossForm.value | json}} -->
 
     <br> <br> <br>
+ 
+    <div>
+        <table *ngFor="let text of texts">
+            <tr>
+                <td colspan="100"> <strong>{{text.sourceLanguage}}</strong> ({{text.datasetCitation}} {{text.year}}) </td>
+            </tr>
+            <tr>
+                <td *ngFor="let pair of text.morphemeGlossMap"> {{pair.morpheme}} </td>
+            </tr>
+            <tr>
+                <td *ngFor="let pair of text.morphemeGlossMap"> {{pair.gloss}} </td>
+            </tr>
+            <tr>
+                <td colspan="100">{{text.freeTranslation}}</td>
+            </tr>
+        </table>
+    </div>
 
-    <table>
-        <tr>
-            <th>Language</th>
-            <th>Author/Dataset</th>
-            <th>Year</th>
-        </tr>
-        <tr>
-            <!-- *ngFor="morph of morphemes | async"; maybe start tying into entity model? -->
-            <td>
-                Morpheme
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Gloss
-            </td>
-        </tr>
-        <tr>
-            <td>Translation</td>
-        </tr>
-    </table>
-
-    <br> <br>
-    <p>
-        Recommended citation:
-    </p>
-    <p>
-        Closson, Reuben M. 2021. Interlinear Gloss Formatting Web Application. Online: http://ilg.closson.tech
-    </p>
 </mat-card>

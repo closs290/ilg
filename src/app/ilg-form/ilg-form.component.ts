@@ -12,9 +12,10 @@ import { map, startWith } from 'rxjs/operators';
 
 // ILG
 import { createInterlinearText } from '../ilg-store/ilg.actions';
-import { InterlinearGloss } from '../ilg-store/ilg.reducer';
+import { InterlinearGloss, morphemeGlossMap } from '../ilg-store/ilg.reducer';
 import { LANGUAGES } from './languages';
 import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses';
+import { texts } from '../sample-gloss-bank';
 
 @Component({
   selector: 'app-ilg-form',
@@ -29,6 +30,7 @@ export class IlgFormComponent implements OnInit {
     languages: Observable<string[]>;
     glosses: Observable<standardAbbreviation[]>;
     autoCompleteControl = new FormControl();
+    texts = texts;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -56,6 +58,24 @@ export class IlgFormComponent implements OnInit {
             startWith(''),
             map((currentGloss: standardAbbreviation) => currentGloss ? this._filterGlosses(currentGloss) : LIST_OF_STANDARD_ABBREVIATIONS.slice())
         );
+    }
+
+    listOfLanguages(): string[] {
+        const arrayOfLanguages: string[] = [];
+        this.texts.forEach((text) => {
+            arrayOfLanguages.push(text.sourceLanguage);
+        });
+        console.info(arrayOfLanguages);
+        return arrayOfLanguages;
+    }
+
+    listOfMorphemes(): morphemeGlossMap[] {
+        const arrayOfMorphs: morphemeGlossMap[] = [];
+        this.texts.forEach((text) => {
+            text.morphemeGlossMap.forEach((pair) => arrayOfMorphs.push(pair));
+        });
+        console.info(arrayOfMorphs);
+        return arrayOfMorphs;
     }
 
     _filterLanguages(value: string): string[] {

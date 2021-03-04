@@ -12,7 +12,7 @@ from './ilg.actions';
 
 export interface morphemeGlossMap {
     morpheme: string,
-    gloss: string[]
+    gloss: string
 }
 
 export interface word {
