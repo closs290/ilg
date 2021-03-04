@@ -91,8 +91,26 @@
 </div>
 
 <mat-card>
-    <!-- <h3>Current Interlinear Gloss Datamodel:</h3>
-    {{this.interlinearGlossForm.value | json}} -->
+    <h3>Current Interlinear Gloss Datamodel:</h3>
+    {{this.interlinearGlossForm.value | json}}
+
+    <br> <br>
+
+    <table>
+        <tr>
+            <td colspan="100"> <strong>{{this.interlinearGlossForm.value.sourceLanguage}}</strong> 
+                ({{this.interlinearGlossForm.value.datasetCitation}} {{this.interlinearGlossForm.value.year}}) </td>
+        </tr>
+        <tr>
+            <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> {{pair.morph}} </td>
+        </tr>
+        <tr>
+            <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> {{pair.gloss}} </td>
+        </tr>
+        <tr>
+            <td colspan="100">{{this.interlinearGlossForm.value.freeTranslation}}</td>
+        </tr>
+    </table>
 
     <br> <br> <br>
  
