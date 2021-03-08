@@ -1,7 +1,6 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 //RXJS
 import { Observable } from 'rxjs';
@@ -25,8 +24,7 @@ export class IlgFormComponent implements OnInit {
     autoCompleteControl = new FormControl();
 
     constructor(
-        private formBuilder: FormBuilder,
-        private _snackBar: MatSnackBar
+        private formBuilder: FormBuilder
     ) { 
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', 
@@ -74,17 +72,5 @@ export class IlgFormComponent implements OnInit {
             gloss: ''
         });
     }
-
-    onSubmit(): void {
-        console.dir("Current form values:" + this.interlinearGlossForm.value);
-        this.giveUserSuccessResponse();
-    }
-
-    giveUserSuccessResponse() {
-        console.info("Current form: " + this.interlinearGlossForm.value);
-        this._snackBar.open("Interlinear gloss entered", "OK", {
-            duration: 10000
-        })
-    };
 
 }
