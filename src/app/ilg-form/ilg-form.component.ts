@@ -3,19 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-// NGRX
-import { Store } from '@ngrx/store';
-
 //RXJS
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 
-// ILG
-import { createInterlinearText } from '../ilg-store/ilg.actions';
-import { InterlinearGloss, morphemeGlossMap } from '../ilg-store/ilg.reducer';
 import { LANGUAGES } from './languages';
 import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses';
-import { texts } from '../sample-gloss-bank';
 
 @Component({
   selector: 'app-ilg-form',
@@ -30,20 +23,18 @@ export class IlgFormComponent implements OnInit {
     languages: Observable<string[]>;
     glosses: Observable<standardAbbreviation[]>;
     autoCompleteControl = new FormControl();
-    texts = texts;
 
     constructor(
         private formBuilder: FormBuilder,
-        private store: Store,
         private _snackBar: MatSnackBar
     ) { 
         this.interlinearGlossForm = this.formBuilder.group({
-            sourceLanguage: '', // enum/string
+            sourceLanguage: '', 
             datasetCitation: '',
             year: '',
             morphemeGlossMap: this.formBuilder.array([]),
             freeTranslation: ''
-        }); //test
+        }); 
     }
 
     ngOnInit(): void {
@@ -53,29 +44,10 @@ export class IlgFormComponent implements OnInit {
             map((currentLanguage: string) => this._filterLanguages(currentLanguage))
         );
 
-        // In future: categorize: https://stackblitz.com/angular/gggyoobpvmx?file=src%2Fapp%2Fautocomplete-optgroup-example.ts 
         this.glosses = this.autoCompleteControl.valueChanges.pipe(
             startWith(''),
             map((currentGloss: standardAbbreviation) => currentGloss ? this._filterGlosses(currentGloss) : LIST_OF_STANDARD_ABBREVIATIONS.slice())
         );
-    }
-
-    listOfLanguages(): string[] {
-        const arrayOfLanguages: string[] = [];
-        this.texts.forEach((text) => {
-            arrayOfLanguages.push(text.sourceLanguage);
-        });
-        console.info(arrayOfLanguages);
-        return arrayOfLanguages;
-    }
-
-    listOfMorphemes(): morphemeGlossMap[] {
-        const arrayOfMorphs: morphemeGlossMap[] = [];
-        this.texts.forEach((text) => {
-            text.morphemeGlossMap.forEach((pair) => arrayOfMorphs.push(pair));
-        });
-        console.info(arrayOfMorphs);
-        return arrayOfMorphs;
     }
 
     _filterLanguages(value: string): string[] {
@@ -104,19 +76,12 @@ export class IlgFormComponent implements OnInit {
     }
 
     onSubmit(): void {
-        console.dir(this.interlinearGlossForm.value);
-        const newIlg = {
-            language: this.interlinearGlossForm.value.sourceLanguage,
-            datasetAuthor: this.interlinearGlossForm.value.datasetCitation,
-            year: this.interlinearGlossForm.value.year,
-            phrases: [], // TODO: transform form entry to 'phrase' type
-            freeTranslation: this.interlinearGlossForm.value.freeTranslation
-        } as InterlinearGloss;
-        this.store.dispatch(createInterlinearText({ ilg: newIlg }));
+        console.dir("Current form values:" + this.interlinearGlossForm.value);
         this.giveUserSuccessResponse();
     }
 
     giveUserSuccessResponse() {
+        console.info("Current form: " + this.interlinearGlossForm.value);
         this._snackBar.open("Interlinear gloss entered", "OK", {
             duration: 10000
         })

@@ -13,21 +13,16 @@
                         {{language}}
                     </mat-option>
                 </mat-autocomplete>
-                <!-- TODO: Change these mat icons to be validator indicators -->
-                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
                 <mat-hint>Type in language</mat-hint>
-                <!-- TODO: Make this a dropdown that you can also add entries to in future -->
             </mat-form-field>
             <mat-form-field appearance="outline" class="dataset">
                 <mat-label>Dataset Citation</mat-label>
                 <input matInput placeholder="Closson" formControlName="datasetCitation">
-                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
                 <mat-hint>Author, Dataset</mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline" class="year">
                 <mat-label>Year</mat-label>
                 <input matInput placeholder="2021" formControlName="year">
-                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
                 <mat-hint>Dataset year</mat-hint>
             </mat-form-field>
     
@@ -37,14 +32,12 @@
                 <table formArrayName="morphemeGlossMap">
                     <tr>
                         <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
-                            <!--{{i}}-->
                             <mat-form-field appearance="outline" class="morpheme" id="morpheme{{i}}">
                                 <mat-label>Morph</mat-label>
                                 <input matInput formControlName="morph"
                                                 type="text"
                                                 placeholder="I"
                                                 class="morphs"/>
-                                <!-- <mat-hint>Source language morpheme</mat-hint> -->
                             </mat-form-field>
                         </td>
                         <td>
@@ -57,19 +50,16 @@
                         <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
                             <mat-form-field appearance="outline" class="gloss" id="gloss{{i}}">
                                 <mat-label>Gloss</mat-label>
-                                <!-- TODO: add a dropdown with abbreviations from Leipzig -->
                                 <input matInput formControlName="gloss"
                                                 type="text"
                                                 placeholder="1SG"
                                                 class="glosses"
                                                 [matAutocomplete]="auto" />
                                 <mat-autocomplete #auto="matAutocomplete">
-                                    <!-- This currently supplants the other option. TODO: Let user select more than one abbrev -->
                                     <mat-option *ngFor="let gloss of glosses | async" [value]="gloss.abbreviation">
                                         {{gloss.abbreviation}}: {{gloss.full}}
                                     </mat-option>
                                 </mat-autocomplete>
-                                <!-- <mat-hint>Target language single-morpheme translation</mat-hint> -->
                             </mat-form-field>
                         </td>
                     </tr>
@@ -81,7 +71,6 @@
             <mat-form-field appearance="outline" class="freeTranslation">
                 <mat-label>Free Translation</mat-label>
                 <input matInput placeholder="I" formControlName="freeTranslation">
-                <!-- <mat-icon matSuffix>sentiment_very_satisfied</mat-icon> -->
                 <mat-hint>Natural language translation</mat-hint>
             </mat-form-field>
             <br><br><br>
@@ -91,10 +80,6 @@
 </div>
 
 <mat-card>
-    <!-- <h3>Current Interlinear Gloss Datamodel:</h3>
-    {{this.interlinearGlossForm.value | json}} -->
-
-    <br> <br>
 
     <table>
         <tr>
@@ -111,24 +96,5 @@
             <td colspan="100">{{this.interlinearGlossForm.value.freeTranslation}}</td>
         </tr>
     </table>
-
-    <!-- <br> <br> <br>
- 
-    <div>
-        <table *ngFor="let text of texts">
-            <tr>
-                <td colspan="100"> <strong>{{text.sourceLanguage}}</strong> ({{text.datasetCitation}} {{text.year}}) </td>
-            </tr>
-            <tr>
-                <td *ngFor="let pair of text.morphemeGlossMap"> {{pair.morpheme}} </td>
-            </tr>
-            <tr>
-                <td *ngFor="let pair of text.morphemeGlossMap"> {{pair.gloss}} </td>
-            </tr>
-            <tr>
-                <td colspan="100">{{text.freeTranslation}}</td>
-            </tr>
-        </table>
-    </div> -->
 
 </mat-card>
