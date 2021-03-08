@@ -1,0 +1,74 @@
+table {
+    margin-bottom: 10px;
+}
+
+.flex-container {
+    display: flex;
+    // flex-direction: column;
+    // flex-wrap: wrap;
+    // flex-flow: column wrap;
+    // justify-content: flex-start;
+    // align-items: flex-start;
+    align-content: stretch;
+
+    .gloss-form-card {
+        width: calc(100%);
+
+        .gloss-form {
+            .language {
+                order: 1;
+                width: calc(33%);
+                // align-self: flex-start;
+            }
+            .dataset {
+                order: 2;
+                width: calc(33%);
+            }
+            .year {
+                order: 3;
+                width: calc(33%);
+            }
+
+            .morpheme-gloss-pairs {
+
+                max-width: calc(100%);
+                overflow-x: auto;
+
+                .morphs {
+                    order: 4;
+                    max-width: 5em;
+                    align-self: flex-start;
+                }
+                .glosses {
+                    order: 4;
+                    max-width: 2em;
+                    align-self: flex-end;
+                }
+            }
+            
+            .freeTranslation{
+                order: 5;
+                width: 100%;
+                // align-self: flex-end;
+            }
+        }
+    }
+}
+
+.morpheme {
+    max-width: 5em;
+    padding: 0px;
+}
+
+.gloss {
+    max-width: 5em;
+    padding: 0px;
+}
+
+td {
+    padding-bottom: 0px;
+}
+
+.mat-form-field-wrapper {
+    padding-bottom: 0em;
+}

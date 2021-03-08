@@ -6,6 +6,8 @@ I intend to license this software under Creative Commons Attribution-NonCommerci
 
 Intent in my goals for licensing: "You don't owe me money for using this, but please attribute me and don't make money off of it yourself. Don't contribute for now, but I will likely open that up in the future. If you are using this service in order to write a paper as a college student, grad student, or part of your publish-or-perish professorship, absolutely you can use this at no cost. If you happen to get paid for that publication, literally no worries. The whole point of this app is for academics to use it and not pay me (but citations would be nice!)."
 
+(C) 2021 Reuben M. Closson
+
 # Ilg
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.1.
