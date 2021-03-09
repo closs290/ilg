@@ -17,6 +17,8 @@ import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses'
 export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
+    formatForm: FormGroup;
+    // selectedFont: string;
     languageOptions: string[] = [...LANGUAGES];
     glossOptions: standardAbbreviation[] = [...LIST_OF_STANDARD_ABBREVIATIONS];
     languages: Observable<string[]>;
@@ -28,11 +30,15 @@ export class IlgFormComponent implements OnInit {
     ) { 
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', 
-            datasetCitation: '',
+            author: '',
             year: '',
+            page: '',
             morphemeGlossMap: this.formBuilder.array([]),
             freeTranslation: ''
         }); 
+        this.formatForm = this.formBuilder.group({
+            selectedFont: ''
+        })
     }
 
     ngOnInit(): void {
@@ -46,6 +52,12 @@ export class IlgFormComponent implements OnInit {
             startWith(''),
             map((currentGloss: standardAbbreviation) => currentGloss ? this._filterGlosses(currentGloss) : LIST_OF_STANDARD_ABBREVIATIONS.slice())
         );
+    }
+
+    clear(): void {
+        this.interlinearGlossForm.reset();
+        this.morphs().clear();
+        this.addPair();
     }
 
     _filterLanguages(value: string): string[] {
@@ -71,6 +83,13 @@ export class IlgFormComponent implements OnInit {
             morph: '',
             gloss: ''
         });
+    }
+
+    getFormat() {
+        let myStyles = {
+            'font-face': this.formatForm.value.selectedFont
+        }
+        return myStyles;
     }
 
 }

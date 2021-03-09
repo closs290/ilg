@@ -4,11 +4,6 @@ table {
 
 .flex-container {
     display: flex;
-    // flex-direction: column;
-    // flex-wrap: wrap;
-    // flex-flow: column wrap;
-    // justify-content: flex-start;
-    // align-items: flex-start;
     align-content: stretch;
 
     .gloss-form-card {
@@ -18,7 +13,6 @@ table {
             .language {
                 order: 1;
                 width: calc(33%);
-                // align-self: flex-start;
             }
             .dataset {
                 order: 2;
@@ -49,7 +43,6 @@ table {
             .freeTranslation{
                 order: 5;
                 width: 100%;
-                // align-self: flex-end;
             }
         }
     }
@@ -63,6 +56,10 @@ table {
 .gloss {
     max-width: 5em;
     padding: 0px;
+}
+
+.gloss-abbreviation {
+    font-variant: small-caps;
 }
 
 td {
