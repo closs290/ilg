@@ -5,7 +5,6 @@
             <mat-form-field appearance="outline" class="language">
                 <mat-label>Source Language</mat-label>
                 <input matInput 
-                        placeholder="English" 
                         formControlName="sourceLanguage"
                         [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete">
@@ -17,20 +16,20 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="dataset">
                 <mat-label>Dataset/Author</mat-label>
-                <input matInput placeholder="Closson" formControlName="author">
+                <input matInput formControlName="author">
             </mat-form-field>
             <mat-form-field appearance="outline" class="year">
                 <mat-label>Year</mat-label>
-                <input matInput placeholder="2021" formControlName="year">
+                <input matInput formControlName="year">
             </mat-form-field>
             <mat-form-field appearance="outline" class="page">
                 <mat-label>Page Number</mat-label>
-                <input matInput placeholder="42" formControlName="page">
+                <input matInput formControlName="page">
             </mat-form-field>
     
             <br> <br>
 
-            <mat-card class="morpheme-gloss-pairs">
+            <div class="morpheme-gloss-pairs">
                 <table formArrayName="morphemeGlossMap">
                     <tr>
                         <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
@@ -38,7 +37,6 @@
                                 <mat-label>Morph</mat-label>
                                 <input matInput formControlName="morph"
                                                 type="text"
-                                                placeholder="I"
                                                 class="morphs"/>
                             </mat-form-field>
                         </td>
@@ -54,21 +52,18 @@
                                 <mat-label>Gloss</mat-label>
                                 <input matInput formControlName="gloss"
                                                 type="text"
-                                                placeholder="1SG"
                                                 class="glosses"
                                                 [matAutocomplete]="auto" />
                                 <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let gloss of glosses | async" [value]="gloss.abbreviation">
-                                        {{gloss.abbreviation}}: {{gloss.full}}
+                                    <mat-option *ngFor="let gloss of glosses | async" [value]="gloss.abbreviation" title="{{gloss.full}}">
+                                        {{gloss.abbreviation}}
                                     </mat-option>
                                 </mat-autocomplete>
                             </mat-form-field>
                         </td>
                     </tr>
                 </table>
-            </mat-card>
-    
-            <br>
+            </div>
     
             <mat-form-field appearance="outline" class="freeTranslation">
                 <mat-label>Free Translation</mat-label>
@@ -76,7 +71,8 @@
                 <mat-hint>Natural language translation</mat-hint>
             </mat-form-field>
 
-            <button (click)="clear()">Clear ILG</button>
+            <br><br>
+            <button mat-flat-button color="primary" (click)="clear()">Clear ILG</button>
         </form>
     </mat-card>
 </div>

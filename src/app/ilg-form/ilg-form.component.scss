@@ -12,37 +12,41 @@ table {
         .gloss-form {
             .language {
                 order: 1;
-                width: calc(33%);
+                width: calc(25%);
             }
             .dataset {
                 order: 2;
-                width: calc(33%);
+                width: calc(25%);
             }
             .year {
                 order: 3;
-                width: calc(33%);
+                width: calc(25%);
+            }
+            .page {
+                order: 4;
+                width: calc(25%);
             }
 
             .morpheme-gloss-pairs {
 
-                max-width: calc(100%);
+                max-width: calc(80%);
                 overflow-x: auto;
 
                 .morphs {
-                    order: 4;
+                    order: 5;
                     max-width: 5em;
                     align-self: flex-start;
                 }
                 .glosses {
-                    order: 4;
+                    order: 5;
                     max-width: 2em;
                     align-self: flex-end;
                 }
             }
             
             .freeTranslation{
-                order: 5;
-                width: 100%;
+                order: 6;
+                width: 80%;
             }
         }
     }
