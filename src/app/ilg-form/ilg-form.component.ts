@@ -24,7 +24,7 @@ import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses'
 })
 export class IlgFormComponent implements OnInit {
 
-    glossService: InterlinearGlossService;
+    glossService: InterlinearGlossService = new InterlinearGlossService();
 
     interlinearGlossForm: FormGroup;
     languageOptions: string[] = [...LANGUAGES];
@@ -56,6 +56,7 @@ export class IlgFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.addPair();
+        console.dir(this.glossService.InterlinearGlossBank.getValue());
         this.languages = this.autoCompleteControl.valueChanges.pipe(
             startWith(''),
             map((currentLanguage: string) => this._filterLanguages(currentLanguage))
@@ -112,7 +113,7 @@ export class IlgFormComponent implements OnInit {
             freeTranslation: this.interlinearGlossForm.value.freeTranslation
         } as InterlinearGloss;
 
-        this.glossService.InterlinearGlossBank.next([this.glossService.InterlinearGlossBank.value, newIlg]);
+        this.glossService.InterlinearGlossBank.next([...this.glossService.InterlinearGlossBank.value, newIlg]);
 
         // this.store.dispatch(createInterlinearText({ ilg: newIlg }));
         this.giveUserSuccessResponse();

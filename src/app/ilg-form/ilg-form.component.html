@@ -97,26 +97,26 @@
     <br> <br> <br>
 
     <h3>Current Interlinear Gloss:</h3>
-    <table>
+    <table *ngFor="let ilg of glossService.InterlinearGlossBank.getValue()">
         <tr>
-            <th>{{this.interlinearGlossForm.value.sourceLanguage}}</th>
-            <th>{{this.interlinearGlossForm.value.datasetCitation}}, </th>
-            <th>{{this.interlinearGlossForm.value.year}}</th>
+            <th>{{ilg.language}}</th>
+            <th>{{ilg.datasetAuthor}}, </th>
+            <th>{{ilg.year}}</th>
             <th> test</th>
         </tr>
-        <tr>
+        <tr *ngIf="ilg.words">
             <!-- *ngFor="morph of morphemes | async"; maybe start tying into entity model? -->
-            <td *ngFor="let pair of morphs | keys">
-                {{mgPairs().morpheme}}
+            <td *ngFor="let pair of ilg.words[0].morphemes">
+                {{pair.morpheme}}
+            </td>
+        </tr>
+        <tr *ngIf="ilg.words">
+            <td *ngFor="let pair of ilg.words[0].morphemes">
+                {{pair.gloss}}
             </td>
         </tr>
         <tr>
-            <td *ngFor="let pair of morphs | keys">
-                {{mgPairs().gloss}}
-            </td>
-        </tr>
-        <tr>
-            <td>Translation: {{this.interlinearGlossForm.value.freeTranslation}}</td>
+            <td>Translation: {{ilg.freeTranslation}}</td>
         </tr>
     </table>
 
@@ -125,6 +125,6 @@
         Recommended citation:
     </p>
     <p>
-        Closson, Reuben M. 2021. Interlinear Gloss Formatting Web Application. Online: http://ilg.closson.tech
+        Closson, Reuben M. 2021. <em>Interlinear Gloss Formatting Web Application.</em> Online: http://ilg.closson.tech
     </p>
 </mat-card>

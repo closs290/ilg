@@ -10,15 +10,21 @@ import { interlinearText } from './ilg.type';
 })
 export class InterlinearGlossService {
 
-  InterlinearGlossBank: BehaviorSubject<InterlinearGloss[]>;
+  InterlinearGlossBank = new BehaviorSubject<InterlinearGloss[]> ([{
+    language: '',
+    datasetAuthor: '',
+    year: 0,
+    phrases: [],
+    freeTranslation: ''
+  }]);
 
   constructor() { 
-      this.InterlinearGlossBank.next([{
-        language: '',
-        datasetAuthor: '',
-        year: 0,
-        phrases: [],
-        freeTranslation: ''
-      } as InterlinearGloss]);
+      // this.InterlinearGlossBank.next([{
+      //   language: '',
+      //   datasetAuthor: '',
+      //   year: 0,
+      //   phrases: [],
+      //   freeTranslation: ''
+      // } as InterlinearGloss]);
   }
 }
