@@ -12,7 +12,7 @@ export interface InterlinearGloss {
 @Injectable({
   providedIn: 'root'
 })
-export class InterlinearGlossService {
+export class ILGService {
 
   InterlinearGlossBank = new BehaviorSubject<InterlinearGloss[]>(
     [

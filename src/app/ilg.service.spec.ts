@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { IlgService } from './ilg.service';
+import { ILGService } from './ilg.service';
 
-describe('IlgService', () => {
-  let service: IlgService;
+describe('ILGService', () => {
+  let service: ILGService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(IlgService);
+    service = TestBed.inject(ILGService);
   });
 
   it('should be created', () => {

@@ -1,15 +1,9 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
-
-//RXJS
-import { Observable } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 
 // ILG App
-import { InterlinearGloss, InterlinearGlossService } from '../ilg.service';
-import { LANGUAGES } from './languages';
-import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses';
+import { InterlinearGloss, ILGService } from '../ilg.service';
 
 @Component({
   selector: 'app-ilg-form',
@@ -19,25 +13,11 @@ import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses'
 export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
-    ilgService: InterlinearGlossService = new InterlinearGlossService();
-
-    // formatForm: FormGroup;
-    languageOptions: string[] = LANGUAGES;
-    glossOptions: standardAbbreviation[] = LIST_OF_STANDARD_ABBREVIATIONS;
-    filteredLanguages: Observable<string[]>;
-    filteredGlosses: Observable<standardAbbreviation[]>;
-    autoCompleteControl = new FormControl();
+    ilgService: ILGService = new ILGService();
 
     constructor(
         private formBuilder: FormBuilder
     ) { 
-        // this.ilgService.InterlinearGlossBank.next([{
-        //     language: '',
-        //     author: '',
-        //     year: '',
-        //     phrases: [],
-        //     freeTranslation: ''
-        //   }]);
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', 
             author: '',
@@ -45,23 +25,11 @@ export class IlgFormComponent implements OnInit {
             morphemeGlossMap: this.formBuilder.array([]),
             freeTranslation: ''
         }); 
-        // this.formatForm = this.formBuilder.group({
-        //     selectedFont: ''
-        // })
     }
 
     ngOnInit(): void {
         this.addPair();
-        this.filteredLanguages = this.autoCompleteControl.valueChanges.pipe(
-            startWith(''),
-            map((currentLanguage: string) => this._filterLanguages(currentLanguage))
-        );
-
-        this.filteredGlosses = this.autoCompleteControl.valueChanges.pipe(
-            startWith(''),
-            map(value => typeof value === 'string' ? value : value.abbreviation),
-            map((currentGloss) => currentGloss ? this._filterGlosses(currentGloss) : this.glossOptions.slice())
-        );
+        alert("Note that all glosses will be cleared on browser refresh");
     }
 
     submit() {
@@ -73,34 +41,15 @@ export class IlgFormComponent implements OnInit {
             freeTranslation: this.interlinearGlossForm.value.freeTranslation
         } as InterlinearGloss;
         this.ilgService.InterlinearGlossBank.next([...this.ilgService.InterlinearGlossBank.value, newIlg]);
-    }
-
-    checkService() {
-        for (let i = 0; i < this.ilgService.InterlinearGlossBank.value.length; i++) {
-            console.dir(this.ilgService.InterlinearGlossBank.value[i]);
-        }
+        this.interlinearGlossForm.get('freeTranslation').reset();
+        this.morphs().clear();
+        this.addPair();
     }
 
     clear(): void {
         this.interlinearGlossForm.reset();
         this.morphs().clear();
         this.addPair();
-    }
-
-    displayGloss(gloss: standardAbbreviation): string {
-        return gloss && gloss.abbreviation ? gloss.abbreviation : '';
-    }
-
-    _filterLanguages(value: string): string[] {
-        if (value) {
-            const filterValue = value.toLowerCase();
-            return this.languageOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
-        }
-    }
-
-    _filterGlosses(glossAbbrev: string): standardAbbreviation[] {
-        const filterValue = glossAbbrev.toLowerCase();
-        return this.glossOptions.filter(option => option.abbreviation.toLowerCase().indexOf(filterValue) === 0);  
     }
 
     morphs(): FormArray {
@@ -117,12 +66,5 @@ export class IlgFormComponent implements OnInit {
             gloss: ''
         });
     }
-
-    // getFormat() {
-    //     let myStyles = {
-    //         'font-face': this.formatForm.value.selectedFont
-    //     }
-    //     return myStyles;
-    // }
 
 }
