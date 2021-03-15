@@ -3,7 +3,7 @@ export interface standardAbbreviation {
     full: string
 }
 
-export const LIST_OF_STANDARD_ABBREVIATIONS = [
+export const LIST_OF_STANDARD_ABBREVIATIONS: standardAbbreviation[] = [
     {
         abbreviation: '1',
         full: 'first person'

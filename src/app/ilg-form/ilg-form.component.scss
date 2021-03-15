@@ -12,19 +12,19 @@ table {
         .gloss-form {
             .language {
                 order: 1;
-                width: calc(25%);
+                width: calc(30%);
             }
             .dataset {
                 order: 2;
-                width: calc(25%);
+                width: calc(30%);
             }
             .year {
                 order: 3;
-                width: calc(25%);
+                width: calc(30%);
             }
             .page {
                 order: 4;
-                width: calc(25%);
+                width: calc(10%);
             }
 
             .morpheme-gloss-pairs {
@@ -34,19 +34,22 @@ table {
 
                 .morphs {
                     order: 5;
-                    max-width: 5em;
                     align-self: flex-start;
                 }
                 .glosses {
                     order: 5;
-                    max-width: 2em;
+                    max-width: 5em;
                     align-self: flex-end;
+                }
+                .add-morpheme {
+                    margin-left: 1em;
+                    margin-bottom: 2em;
                 }
             }
             
             .freeTranslation{
                 order: 6;
-                width: 80%;
+                width: 90%;
             }
         }
     }
@@ -62,7 +65,7 @@ table {
     padding: 0px;
 }
 
-.gloss-abbreviation {
+.small-caps {
     font-variant: small-caps;
 }
 

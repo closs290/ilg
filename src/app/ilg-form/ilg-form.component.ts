@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, FormControl } f
 
 //RXJS
 import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
+import { filter, map, startWith } from 'rxjs/operators';
 
 import { LANGUAGES } from './languages';
 import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses';
@@ -18,11 +18,10 @@ export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
     formatForm: FormGroup;
-    // selectedFont: string;
-    languageOptions: string[] = [...LANGUAGES];
-    glossOptions: standardAbbreviation[] = [...LIST_OF_STANDARD_ABBREVIATIONS];
-    languages: Observable<string[]>;
-    glosses: Observable<standardAbbreviation[]>;
+    languageOptions: string[] = LANGUAGES;
+    glossOptions: standardAbbreviation[] = LIST_OF_STANDARD_ABBREVIATIONS;
+    filteredLanguages: Observable<string[]>;
+    filteredGlosses: Observable<standardAbbreviation[]>;
     autoCompleteControl = new FormControl();
 
     constructor(
@@ -43,14 +42,15 @@ export class IlgFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.addPair();
-        this.languages = this.autoCompleteControl.valueChanges.pipe(
+        this.filteredLanguages = this.autoCompleteControl.valueChanges.pipe(
             startWith(''),
             map((currentLanguage: string) => this._filterLanguages(currentLanguage))
         );
 
-        this.glosses = this.autoCompleteControl.valueChanges.pipe(
+        this.filteredGlosses = this.autoCompleteControl.valueChanges.pipe(
             startWith(''),
-            map((currentGloss: standardAbbreviation) => currentGloss ? this._filterGlosses(currentGloss) : LIST_OF_STANDARD_ABBREVIATIONS.slice())
+            map(value => typeof value === 'string' ? value : value.abbreviation),
+            map((currentGloss) => currentGloss ? this._filterGlosses(currentGloss) : this.glossOptions.slice())
         );
     }
 
@@ -60,14 +60,20 @@ export class IlgFormComponent implements OnInit {
         this.addPair();
     }
 
-    _filterLanguages(value: string): string[] {
-        const filterValue = value.toLowerCase();
-        return this.languageOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    displayGloss(gloss: standardAbbreviation): string {
+        return gloss && gloss.abbreviation ? gloss.abbreviation : '';
     }
 
-    _filterGlosses(value: standardAbbreviation): standardAbbreviation[] {
-        const filterValue = value.abbreviation.toLowerCase();
-        return this.glossOptions.filter(option => option.abbreviation.toLowerCase().indexOf(filterValue) === 0);
+    _filterLanguages(value: string): string[] {
+        if (value) {
+            const filterValue = value.toLowerCase();
+            return this.languageOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+        }
+    }
+
+    _filterGlosses(glossAbbrev: string): standardAbbreviation[] {
+        const filterValue = glossAbbrev.toLowerCase();
+        return this.glossOptions.filter(option => option.abbreviation.toLowerCase().indexOf(filterValue) === 0);  
     }
 
     morphs(): FormArray {

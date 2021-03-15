@@ -8,24 +8,20 @@
                         formControlName="sourceLanguage"
                         [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let language of languages | async" [value]="language">
+                    <mat-option *ngFor="let language of filteredLanguages | async" [value]="language">
                         {{language}}
                     </mat-option>
                 </mat-autocomplete>
-                <mat-hint>Type in language</mat-hint>
             </mat-form-field>
             <mat-form-field appearance="outline" class="dataset">
                 <mat-label>Dataset/Author</mat-label>
                 <input matInput formControlName="author">
             </mat-form-field>
             <mat-form-field appearance="outline" class="year">
-                <mat-label>Year</mat-label>
+                <mat-label>Year(:Page)</mat-label>
                 <input matInput formControlName="year">
             </mat-form-field>
-            <mat-form-field appearance="outline" class="page">
-                <mat-label>Page Number</mat-label>
-                <input matInput formControlName="page">
-            </mat-form-field>
+
     
             <br> <br>
 
@@ -40,8 +36,8 @@
                                                 class="morphs"/>
                             </mat-form-field>
                         </td>
-                        <td>
-                            <button mat-mini-fab color="primary" type="button" (click)="addPair()">
+                        <td rowspan="2">
+                            <button mat-mini-fab color="primary" type="button" (click)="addPair()" class="add-morpheme">
                                 <mat-icon>add</mat-icon>
                             </button>
                         </td>
@@ -51,11 +47,16 @@
                             <mat-form-field appearance="outline" class="gloss" id="gloss{{i}}">
                                 <mat-label>Gloss</mat-label>
                                 <input matInput formControlName="gloss"
+                                                [formControl]="autoCompleteControl"
                                                 type="text"
                                                 class="glosses"
                                                 [matAutocomplete]="auto" />
-                                <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let gloss of glosses | async" [value]="gloss.abbreviation" title="{{gloss.full}}">
+                                                <!-- [displayWith]="displayGloss" -->
+                                <mat-autocomplete #auto="matAutocomplete" >
+                                    <mat-option *ngFor="let gloss of filteredGlosses | async" 
+                                                [value]="gloss.abbreviation" 
+                                                title="{{gloss.full}}"
+                                    >
                                         {{gloss.abbreviation}}
                                     </mat-option>
                                 </mat-autocomplete>
@@ -67,7 +68,7 @@
     
             <mat-form-field appearance="outline" class="freeTranslation">
                 <mat-label>Free Translation</mat-label>
-                <input matInput placeholder="I" formControlName="freeTranslation">
+                <input matInput formControlName="freeTranslation">
                 <mat-hint>Natural language translation</mat-hint>
             </mat-form-field>
 
@@ -77,7 +78,7 @@
     </mat-card>
 </div>
 
-<mat-card>
+<!-- <mat-card>
     <mat-card-title>Formatting</mat-card-title>
     <form [formGroup]="formatForm" class="format-form">
         <mat-form-field appearance="fill">
@@ -92,25 +93,29 @@
             </select>
           </mat-form-field>
     </form>
-</mat-card>
+</mat-card> -->
 
 <mat-card>
     <mat-card-title>Formatted interlinear gloss:</mat-card-title>
-    <table class="gloss-abbreviation" >
+    <table>
         <tr>
-            <td colspan="100" [ngStyle]="getFormat()">
+            <!-- <td colspan="100" [ngStyle]="getFormat()"> -->
+            <td colspan="100">
                 <strong>{{this.interlinearGlossForm.value.sourceLanguage}}</strong> 
-                ({{this.interlinearGlossForm.value.author}} {{this.interlinearGlossForm.value.year}}:{{this.interlinearGlossForm.value.page}}) </td>
+                ({{this.interlinearGlossForm.value.author}} {{this.interlinearGlossForm.value.year}}) </td>
+                <!-- ({{this.interlinearGlossForm.value.author}} {{this.interlinearGlossForm.value.year}}:{{this.interlinearGlossForm.value.page}}) </td> -->
         </tr>
         <tr>
+            <!-- [ngStyle]="getFormat()" -->
             <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"
-                [ngStyle]="getFormat()"> 
+                > 
                 <em>{{pair.morph}} </em> 
             </td>
         </tr>
+        <!-- <tr class="small-caps"> -->
         <tr>
-            <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"
-                [ngStyle]="getFormat()"> {{pair.gloss}}
+            <!-- [ngStyle]="getFormat()" -->
+            <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> {{pair.gloss}}
             </td>
         </tr>
         <tr>
