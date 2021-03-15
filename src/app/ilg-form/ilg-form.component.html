@@ -72,8 +72,7 @@
                         ({{this.interlinearGlossForm.value.author}} {{this.interlinearGlossForm.value.year}}) </td>
                 </tr>
                 <tr>
-                    <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"
-                        > 
+                    <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> 
                         <em>{{pair.morph}} </em> 
                     </td>
                 </tr>
@@ -101,7 +100,7 @@
                 </tr>
                 <tr *ngIf="ilg.phrases">
                     <td *ngFor="let pair of ilg.phrases">
-                        {{pair.morph}}
+                        <em>{{pair.morph}}</em>
                     </td>
                 </tr>
                 <tr *ngIf="ilg.phrases">
