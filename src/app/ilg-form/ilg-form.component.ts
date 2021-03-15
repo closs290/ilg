@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, FormControl } f
 import { Observable } from 'rxjs';
 import { filter, map, startWith } from 'rxjs/operators';
 
+// ILG App
+import { InterlinearGloss, InterlinearGlossService } from '../ilg.service';
 import { LANGUAGES } from './languages';
 import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses';
 
@@ -17,7 +19,9 @@ import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses'
 export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
-    formatForm: FormGroup;
+    ilgService: InterlinearGlossService = new InterlinearGlossService();
+
+    // formatForm: FormGroup;
     languageOptions: string[] = LANGUAGES;
     glossOptions: standardAbbreviation[] = LIST_OF_STANDARD_ABBREVIATIONS;
     filteredLanguages: Observable<string[]>;
@@ -27,17 +31,23 @@ export class IlgFormComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder
     ) { 
+        // this.ilgService.InterlinearGlossBank.next([{
+        //     language: '',
+        //     author: '',
+        //     year: '',
+        //     phrases: [],
+        //     freeTranslation: ''
+        //   }]);
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', 
             author: '',
             year: '',
-            page: '',
             morphemeGlossMap: this.formBuilder.array([]),
             freeTranslation: ''
         }); 
-        this.formatForm = this.formBuilder.group({
-            selectedFont: ''
-        })
+        // this.formatForm = this.formBuilder.group({
+        //     selectedFont: ''
+        // })
     }
 
     ngOnInit(): void {
@@ -52,6 +62,23 @@ export class IlgFormComponent implements OnInit {
             map(value => typeof value === 'string' ? value : value.abbreviation),
             map((currentGloss) => currentGloss ? this._filterGlosses(currentGloss) : this.glossOptions.slice())
         );
+    }
+
+    submit() {
+        const newIlg = {
+            language: this.interlinearGlossForm.value.sourceLanguage, 
+            author: this.interlinearGlossForm.value.author,
+            year: this.interlinearGlossForm.value.year,
+            phrases: this.interlinearGlossForm.value.morphemeGlossMap,
+            freeTranslation: this.interlinearGlossForm.value.freeTranslation
+        } as InterlinearGloss;
+        this.ilgService.InterlinearGlossBank.next([...this.ilgService.InterlinearGlossBank.value, newIlg]);
+    }
+
+    checkService() {
+        for (let i = 0; i < this.ilgService.InterlinearGlossBank.value.length; i++) {
+            console.dir(this.ilgService.InterlinearGlossBank.value[i]);
+        }
     }
 
     clear(): void {
@@ -91,11 +118,11 @@ export class IlgFormComponent implements OnInit {
         });
     }
 
-    getFormat() {
-        let myStyles = {
-            'font-face': this.formatForm.value.selectedFont
-        }
-        return myStyles;
-    }
+    // getFormat() {
+    //     let myStyles = {
+    //         'font-face': this.formatForm.value.selectedFont
+    //     }
+    //     return myStyles;
+    // }
 
 }

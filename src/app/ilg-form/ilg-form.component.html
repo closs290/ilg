@@ -73,6 +73,8 @@
             </mat-form-field>
 
             <br><br>
+            <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+            <button mat-flat-button color="primary" (click)="checkService()">Check Service</button>
             <button mat-flat-button color="primary" (click)="clear()">Clear ILG</button>
         </form>
     </mat-card>
@@ -119,7 +121,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="100" [ngStyle]="getFormat()">
+            <td colspan="100">
                 "{{this.interlinearGlossForm.value.freeTranslation}}"
             </td>
         </tr>
