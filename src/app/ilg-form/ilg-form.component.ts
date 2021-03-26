@@ -14,6 +14,7 @@ export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
     ilgService: ILGService = new ILGService();
+    currDate = new Date(Date.now());
 
     constructor(
         private formBuilder: FormBuilder
