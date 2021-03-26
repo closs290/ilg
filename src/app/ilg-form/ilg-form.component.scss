@@ -2,13 +2,13 @@ table {
     margin-bottom: 10px;
 }
 
+.mat-flat-button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
 .flex-container {
     display: flex;
-    // flex-direction: column;
-    // flex-wrap: wrap;
-    // flex-flow: column wrap;
-    // justify-content: flex-start;
-    // align-items: flex-start;
     align-content: stretch;
 
     .gloss-form-card {
@@ -17,39 +17,44 @@ table {
         .gloss-form {
             .language {
                 order: 1;
-                width: calc(33%);
-                // align-self: flex-start;
+                width: calc(30%);
             }
             .dataset {
                 order: 2;
-                width: calc(33%);
+                width: calc(30%);
             }
             .year {
                 order: 3;
-                width: calc(33%);
+                width: calc(30%);
+            }
+            .page {
+                order: 4;
+                width: calc(10%);
             }
 
             .morpheme-gloss-pairs {
 
-                max-width: calc(100%);
+                max-width: calc(80%);
                 overflow-x: auto;
 
                 .morphs {
-                    order: 4;
-                    max-width: 5em;
+                    order: 5;
                     align-self: flex-start;
                 }
                 .glosses {
-                    order: 4;
-                    max-width: 2em;
+                    order: 5;
+                    max-width: 5em;
                     align-self: flex-end;
+                }
+                .add-morpheme {
+                    margin-left: 1em;
+                    margin-bottom: 2em;
                 }
             }
             
             .freeTranslation{
-                order: 5;
-                width: 100%;
-                // align-self: flex-end;
+                order: 6;
+                width: 90%;
             }
         }
     }
@@ -63,6 +68,10 @@ table {
 .gloss {
     max-width: 5em;
     padding: 0px;
+}
+
+.small-caps {
+    font-variant: small-caps;
 }
 
 td {

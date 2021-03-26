@@ -1,13 +1,9 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 
-//RXJS
-import { Observable } from 'rxjs';
-import { map, startWith } from 'rxjs/operators';
-
-import { LANGUAGES } from './languages';
-import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses';
+// ILG App
+import { InterlinearGloss, ILGService } from '../ilg.service';
 
 @Component({
   selector: 'app-ilg-form',
@@ -17,18 +13,15 @@ import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses'
 export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
-    languageOptions: string[] = [...LANGUAGES];
-    glossOptions: standardAbbreviation[] = [...LIST_OF_STANDARD_ABBREVIATIONS];
-    languages: Observable<string[]>;
-    glosses: Observable<standardAbbreviation[]>;
-    autoCompleteControl = new FormControl();
+    ilgService: ILGService = new ILGService();
+    currDate = new Date(Date.now());
 
     constructor(
         private formBuilder: FormBuilder
     ) { 
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', 
-            datasetCitation: '',
+            author: '',
             year: '',
             morphemeGlossMap: this.formBuilder.array([]),
             freeTranslation: ''
@@ -37,25 +30,27 @@ export class IlgFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.addPair();
-        this.languages = this.autoCompleteControl.valueChanges.pipe(
-            startWith(''),
-            map((currentLanguage: string) => this._filterLanguages(currentLanguage))
-        );
-
-        this.glosses = this.autoCompleteControl.valueChanges.pipe(
-            startWith(''),
-            map((currentGloss: standardAbbreviation) => currentGloss ? this._filterGlosses(currentGloss) : LIST_OF_STANDARD_ABBREVIATIONS.slice())
-        );
+        alert("Note that all glosses will be cleared on browser refresh");
     }
 
-    _filterLanguages(value: string): string[] {
-        const filterValue = value.toLowerCase();
-        return this.languageOptions.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+    submit() {
+        const newIlg = {
+            language: this.interlinearGlossForm.value.sourceLanguage, 
+            author: this.interlinearGlossForm.value.author,
+            year: this.interlinearGlossForm.value.year,
+            phrases: this.interlinearGlossForm.value.morphemeGlossMap,
+            freeTranslation: this.interlinearGlossForm.value.freeTranslation
+        } as InterlinearGloss;
+        this.ilgService.InterlinearGlossBank.next([...this.ilgService.InterlinearGlossBank.value, newIlg]);
+        this.interlinearGlossForm.get('freeTranslation').reset();
+        this.morphs().clear();
+        this.addPair();
     }
 
-    _filterGlosses(value: standardAbbreviation): standardAbbreviation[] {
-        const filterValue = value.abbreviation.toLowerCase();
-        return this.glossOptions.filter(option => option.abbreviation.toLowerCase().indexOf(filterValue) === 0);
+    clear(): void {
+        this.interlinearGlossForm.reset();
+        this.morphs().clear();
+        this.addPair();
     }
 
     morphs(): FormArray {

@@ -1,98 +1,126 @@
-<div class="flex-container">
-    <mat-card class="gloss-form-card">
-        <mat-card-title>Create an interlinear text:</mat-card-title>
-        <form [formGroup]="interlinearGlossForm" class="gloss-form">
-            <mat-form-field appearance="outline" class="language">
-                <mat-label>Source Language</mat-label>
-                <input matInput 
-                        placeholder="English" 
-                        formControlName="sourceLanguage"
-                        [matAutocomplete]="auto">
-                <mat-autocomplete #auto="matAutocomplete">
-                    <mat-option *ngFor="let language of languages | async" [value]="language">
-                        {{language}}
-                    </mat-option>
-                </mat-autocomplete>
-                <mat-hint>Type in language</mat-hint>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="dataset">
-                <mat-label>Dataset Citation</mat-label>
-                <input matInput placeholder="Closson" formControlName="datasetCitation">
-                <mat-hint>Author, Dataset</mat-hint>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="year">
-                <mat-label>Year</mat-label>
-                <input matInput placeholder="2021" formControlName="year">
-                <mat-hint>Dataset year</mat-hint>
-            </mat-form-field>
-    
-            <br> <br>
-
-            <mat-card class="morpheme-gloss-pairs">
-                <table formArrayName="morphemeGlossMap">
-                    <tr>
-                        <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
-                            <mat-form-field appearance="outline" class="morpheme" id="morpheme{{i}}">
-                                <mat-label>Morph</mat-label>
-                                <input matInput formControlName="morph"
-                                                type="text"
-                                                placeholder="I"
-                                                class="morphs"/>
-                            </mat-form-field>
-                        </td>
-                        <td>
-                            <button mat-mini-fab color="primary" type="button" (click)="addPair()">
-                                <mat-icon>add</mat-icon>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
-                            <mat-form-field appearance="outline" class="gloss" id="gloss{{i}}">
-                                <mat-label>Gloss</mat-label>
-                                <input matInput formControlName="gloss"
-                                                type="text"
-                                                placeholder="1SG"
-                                                class="glosses"
-                                                [matAutocomplete]="auto" />
-                                <mat-autocomplete #auto="matAutocomplete">
-                                    <mat-option *ngFor="let gloss of glosses | async" [value]="gloss.abbreviation">
-                                        {{gloss.abbreviation}}: {{gloss.full}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
-                        </td>
-                    </tr>
-                </table>
+<mat-tab-group>
+    <mat-tab label="Form">
+        <div class="flex-container">
+            <mat-card class="gloss-form-card">
+                <mat-card-title>Create an interlinear text:</mat-card-title>
+                <form [formGroup]="interlinearGlossForm" class="gloss-form">
+                    <mat-form-field appearance="outline" class="language">
+                        <mat-label>Source Language</mat-label>
+                        <input matInput formControlName="sourceLanguage">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="dataset">
+                        <mat-label>Dataset/Author</mat-label>
+                        <input matInput formControlName="author">
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="year">
+                        <mat-label>Year(:Page)</mat-label>
+                        <input matInput formControlName="year">
+                    </mat-form-field>
+        
+            
+                    <br> <br>
+        
+                    <div class="morpheme-gloss-pairs">
+                        <table formArrayName="morphemeGlossMap">
+                            <tr>
+                                <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
+                                    <mat-form-field appearance="outline" class="morpheme" id="morpheme{{i}}">
+                                        <mat-label>Morph</mat-label>
+                                        <input matInput formControlName="morph"
+                                                        type="text"
+                                                        class="morphs"/>
+                                    </mat-form-field>
+                                </td>
+                                <td rowspan="2">
+                                    <button mat-mini-fab color="primary" type="button" (click)="addPair()" class="add-morpheme">
+                                        <mat-icon>add</mat-icon>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
+                                    <mat-form-field appearance="outline" class="gloss" id="gloss{{i}}">
+                                        <mat-label>Gloss</mat-label>
+                                        <input matInput formControlName="gloss"
+                                                        type="text"
+                                                        class="glosses" />
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+            
+                    <mat-form-field appearance="outline" class="freeTranslation">
+                        <mat-label>Free Translation</mat-label>
+                        <input matInput formControlName="freeTranslation">
+                        <mat-hint>Natural language translation</mat-hint>
+                    </mat-form-field>
+        
+                    <br><br>
+                    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+                    <button mat-flat-button color="primary" (click)="clear()">Clear ILG</button>
+                </form>
             </mat-card>
-    
-            <br>
-    
-            <mat-form-field appearance="outline" class="freeTranslation">
-                <mat-label>Free Translation</mat-label>
-                <input matInput placeholder="I" formControlName="freeTranslation">
-                <mat-hint>Natural language translation</mat-hint>
-            </mat-form-field>
-        </form>
-    </mat-card>
-</div>
+        </div>
+        
+        <mat-card>
+            <mat-card-title>Formatted interlinear gloss:</mat-card-title>
+            <table>
+                <tr>
+                    <td colspan="100">
+                        <strong>{{this.interlinearGlossForm.value.sourceLanguage}}</strong> 
+                        ({{this.interlinearGlossForm.value.author}} {{this.interlinearGlossForm.value.year}}) </td>
+                </tr>
+                <tr>
+                    <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> 
+                        <em>{{pair.morph}} </em> 
+                    </td>
+                </tr>
+                <tr>
+                    <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> {{pair.gloss}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="100">
+                        "{{this.interlinearGlossForm.value.freeTranslation}}"
+                    </td>
+                </tr>
+            </table>
+        
+        </mat-card>
+        <mat-card>
+            <p>Recommended citation: </p>
+            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.2. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
+        </mat-card>
+    </mat-tab>
+    <mat-tab label="Library">
+        <mat-card class="gloss-library-card">
+            <mat-card-title>Glosses Created this Session:</mat-card-title>
+            <table *ngFor="let ilg of ilgService.InterlinearGlossBank.getValue()">
+                <tr>
+                    <td colspan="{{ilg.phrases.length}}">
+                        <strong>{{ilg.language}}</strong> ({{ilg.datasetAuthor}} {{ilg.year}}) 
+                    </td>
+                </tr>
+                <tr *ngIf="ilg.phrases">
+                    <td *ngFor="let pair of ilg.phrases">
+                        <em>{{pair.morph}}</em>
+                    </td>
+                </tr>
+                <tr *ngIf="ilg.phrases">
+                    <td *ngFor="let pair of ilg.phrases">
+                        {{pair.gloss}}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="{{ilg.phrases.length}}">{{ilg.freeTranslation}}</td>
+                </tr>
+            </table>
+        </mat-card>
+        <mat-card>
+            <p>Recommended citation: </p>
+            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em>[Computer software], v. 1.2. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
+        </mat-card>
+    </mat-tab>
+</mat-tab-group>
 
-<mat-card>
-    <mat-card-title>Formatted interlinear gloss:</mat-card-title>
-    <table>
-        <tr>
-            <td colspan="100"> <strong>{{this.interlinearGlossForm.value.sourceLanguage}}</strong> 
-                ({{this.interlinearGlossForm.value.datasetCitation}} {{this.interlinearGlossForm.value.year}}) </td>
-        </tr>
-        <tr>
-            <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> <em>{{pair.morph}} </em> </td>
-        </tr>
-        <tr>
-            <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> {{pair.gloss}} </td>
-        </tr>
-        <tr>
-            <td colspan="100">"{{this.interlinearGlossForm.value.freeTranslation}}"</td>
-        </tr>
-    </table>
-
-</mat-card>
