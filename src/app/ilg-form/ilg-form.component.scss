@@ -1,0 +1,83 @@
+table {
+    margin-bottom: 10px;
+}
+
+.mat-flat-button {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.flex-container {
+    display: flex;
+    align-content: stretch;
+
+    .gloss-form-card {
+        width: calc(100%);
+
+        .gloss-form {
+            .language {
+                order: 1;
+                width: calc(30%);
+            }
+            .dataset {
+                order: 2;
+                width: calc(30%);
+            }
+            .year {
+                order: 3;
+                width: calc(30%);
+            }
+            .page {
+                order: 4;
+                width: calc(10%);
+            }
+
+            .morpheme-gloss-pairs {
+
+                max-width: calc(80%);
+                overflow-x: auto;
+
+                .morphs {
+                    order: 5;
+                    align-self: flex-start;
+                }
+                .glosses {
+                    order: 5;
+                    max-width: 5em;
+                    align-self: flex-end;
+                }
+                .add-morpheme {
+                    margin-left: 1em;
+                    margin-bottom: 2em;
+                }
+            }
+            
+            .freeTranslation{
+                order: 6;
+                width: 90%;
+            }
+        }
+    }
+}
+
+.morpheme {
+    max-width: 5em;
+    padding: 0px;
+}
+
+.gloss {
+    max-width: 5em;
+    padding: 0px;
+}
+
+.small-caps {
+    font-variant: small-caps;
+}
+
+td {
+    padding-bottom: 0px;
+}
+
+.mat-form-field-wrapper {
+    padding-bottom: 0em;
+}
