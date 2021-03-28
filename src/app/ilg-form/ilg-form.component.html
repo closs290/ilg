@@ -67,7 +67,7 @@
             <mat-card-title>Formatted interlinear gloss:</mat-card-title>
             <table>
                 <tr>
-                    <td colspan="100">
+                    <td *ngIf="this.interlinearGlossForm.value.author" colspan="100">
                         <strong>{{this.interlinearGlossForm.value.sourceLanguage}}</strong> 
                         ({{this.interlinearGlossForm.value.author}} {{this.interlinearGlossForm.value.year}}) </td>
                 </tr>
@@ -81,7 +81,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="100">
+                    <td *ngIf="this.interlinearGlossForm.value.freeTranslation" colspan="100">
                         "{{this.interlinearGlossForm.value.freeTranslation}}"
                     </td>
                 </tr>
@@ -95,11 +95,11 @@
     </mat-tab>
     <mat-tab label="Library">
         <mat-card class="gloss-library-card">
-            <mat-card-title>Glosses Created this Session:</mat-card-title>
+            <mat-card-title>Glosses created this session:</mat-card-title>
             <table *ngFor="let ilg of ilgService.InterlinearGlossBank.getValue()">
                 <tr>
-                    <td colspan="{{ilg.phrases.length}}">
-                        <strong>{{ilg.language}}</strong> ({{ilg.datasetAuthor}} {{ilg.year}}) 
+                    <td colspan="100">
+                        <strong>{{ilg.language}}</strong> <span *ngIf="ilg.author || ilg.year"> ({{ilg.author}} {{ilg.year}}) </span>
                     </td>
                 </tr>
                 <tr *ngIf="ilg.phrases">
@@ -113,13 +113,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="{{ilg.phrases.length}}">{{ilg.freeTranslation}}</td>
+                    <td colspan="100"><span *ngIf="ilg.freeTranslation">"{{ilg.freeTranslation}}"</span></td>
                 </tr>
             </table>
         </mat-card>
         <mat-card>
             <p>Recommended citation: </p>
-            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em>[Computer software], v. 1.2. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
+            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.2. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
         </mat-card>
     </mat-tab>
 </mat-tab-group>
