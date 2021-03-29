@@ -30,7 +30,6 @@ export class IlgFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.addPair();
-        alert("Note that all glosses will be cleared on browser refresh");
     }
 
     submit() {
@@ -58,12 +57,13 @@ export class IlgFormComponent implements OnInit {
     }
 
     addPair(): void {
-        this.morphs().push(this.newMorphGlossPair());
+        this.morphs().push(this.newMorphGlossGroup());
     }
 
-    newMorphGlossPair(): FormGroup {
+    newMorphGlossGroup(): FormGroup {
         return this.formBuilder.group({
-            morph: '',
+            orthography: '',
+            phonemicMorpheme: '',
             gloss: ''
         });
     }

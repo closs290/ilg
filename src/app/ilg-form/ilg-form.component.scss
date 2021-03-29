@@ -2,10 +2,18 @@ table {
     margin-bottom: 10px;
 }
 
+.layer-label {
+    font-size: 12px;
+}
+
 .mat-flat-button {
     margin-left: 5px;
     margin-right: 5px;
 }
+
+// .mat-form-field-wrapper {
+//     padding-bottom: 0px !important;
+// }
 
 .flex-container {
     display: flex;
@@ -15,6 +23,7 @@ table {
         width: calc(100%);
 
         .gloss-form {
+
             .language {
                 order: 1;
                 width: calc(30%);
@@ -37,23 +46,32 @@ table {
                 max-width: calc(80%);
                 overflow-x: auto;
 
-                .morphs {
+                .ortho {
                     order: 5;
+                    max-width: 7em;
+                    margin-bottom: 0em;
+                }
+
+                .morpheme {
+                    order: 6;
+                    max-width: 7em;
                     align-self: flex-start;
                 }
                 .glosses {
-                    order: 5;
-                    max-width: 5em;
+                    order: 7;
+                    max-width: 7em;
                     align-self: flex-end;
                 }
                 .add-morpheme {
+                    order: 8;
+                    vertical-align: middle;
                     margin-left: 1em;
                     margin-bottom: 2em;
                 }
             }
             
             .freeTranslation{
-                order: 6;
+                order: 9;
                 width: 90%;
             }
         }

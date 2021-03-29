@@ -22,21 +22,42 @@
         
                     <div class="morpheme-gloss-pairs">
                         <table formArrayName="morphemeGlossMap">
+                            <!-- <tr class="layer-label">
+                                <td>Orthographic layer:</td>
+                            </tr> -->
                             <tr>
                                 <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
-                                    <mat-form-field appearance="outline" class="morpheme" id="morpheme{{i}}">
-                                        <mat-label>Morph</mat-label>
-                                        <input matInput formControlName="morph"
+                                    <mat-form-field appearance="outline" class="ortho" id="ortho{{i}}">
+                                        <input matInput formControlName="orthography"
                                                         type="text"
-                                                        class="morphs"/>
+                                                        class="ortho"/>
+                                        <mat-hint *ngIf="i===0">Orthography </mat-hint>
                                     </mat-form-field>
                                 </td>
-                                <td rowspan="2">
-                                    <button mat-mini-fab color="primary" type="button" (click)="addPair()" class="add-morpheme">
+                                <td rowspan="7">
+                                    <button mat-mini-fab color="primary" type="submit" class="add-morpheme"
+                                            (click)="addPair()" (keydown.enter)="addPair()">
                                         <mat-icon>add</mat-icon>
                                     </button>
                                 </td>
                             </tr>
+                            <!-- <tr class="layer-label">
+                                <td>Phonemic layer:</td>
+                            </tr> -->
+                            <tr>
+                                <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
+                                    <mat-form-field appearance="outline" class="morpheme" id="morpheme{{i}}">
+                                        <mat-label>Morpheme</mat-label>
+                                        <input matInput formControlName="phonemicMorpheme"
+                                                        type="text"
+                                                        class="morphs"/>
+                                        <mat-hint *ngIf="i===0">Morpheme</mat-hint>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
+                            <!-- <tr class="layer-label">
+                                <td>Gloss layer:</td>
+                            </tr> -->
                             <tr>
                                 <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
                                     <mat-form-field appearance="outline" class="gloss" id="gloss{{i}}">
@@ -44,6 +65,7 @@
                                         <input matInput formControlName="gloss"
                                                         type="text"
                                                         class="glosses" />
+                                        <mat-hint *ngIf="i===0">Gloss layer</mat-hint>
                                     </mat-form-field>
                                 </td>
                             </tr>
@@ -57,7 +79,7 @@
                     </mat-form-field>
         
                     <br><br>
-                    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+                    <button mat-flat-button color="primary" (click)="submit()" type="button">Submit</button>
                     <button mat-flat-button color="primary" (click)="clear()">Clear ILG</button>
                 </form>
             </mat-card>
@@ -104,7 +126,12 @@
                 </tr>
                 <tr *ngIf="ilg.phrases">
                     <td *ngFor="let pair of ilg.phrases">
-                        <em>{{pair.morph}}</em>
+                        <em>{{pair.orthography}}</em>
+                    </td>
+                </tr>
+                <tr *ngIf="ilg.phrases">
+                    <td *ngFor="let pair of ilg.phrases">
+                        <em>{{pair.phonemicMorpheme}}</em>
                     </td>
                 </tr>
                 <tr *ngIf="ilg.phrases">
