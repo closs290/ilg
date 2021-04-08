@@ -1,9 +1,10 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 
 // ILG App
 import { InterlinearGloss, ILGService } from '../ilg.service';
+import { FONTS } from './fonts';
 
 @Component({
   selector: 'app-ilg-form',
@@ -13,15 +14,15 @@ import { InterlinearGloss, ILGService } from '../ilg.service';
 export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
-    fontForm: FormControl;
     ilgService: ILGService = new ILGService();
     currDate = new Date(Date.now());
+    fonts = FONTS;
 
     constructor(
         private formBuilder: FormBuilder
     ) { 
-        this.fontForm = new FormControl('');
         this.interlinearGlossForm = this.formBuilder.group({
+            fontForm: '',
             sourceLanguage: '', 
             author: '',
             year: '',
