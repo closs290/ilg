@@ -1,6 +1,6 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
 
 // ILG App
 import { InterlinearGloss, ILGService } from '../ilg.service';
@@ -13,12 +13,14 @@ import { InterlinearGloss, ILGService } from '../ilg.service';
 export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
+    fontForm: FormControl;
     ilgService: ILGService = new ILGService();
     currDate = new Date(Date.now());
 
     constructor(
         private formBuilder: FormBuilder
     ) { 
+        this.fontForm = new FormControl('');
         this.interlinearGlossForm = this.formBuilder.group({
             sourceLanguage: '', 
             author: '',
@@ -30,7 +32,6 @@ export class IlgFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.addPair();
-        alert("Note that all glosses will be cleared on browser refresh");
     }
 
     submit() {

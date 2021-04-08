@@ -1,6 +1,6 @@
 <mat-tab-group>
     <mat-tab label="Form">
-        <div class="flex-container">
+        <div class="flex-container" style="font-family: 'Courier New', Courier, monospace;">
             <mat-card class="gloss-form-card">
                 <mat-card-title>Create an interlinear text:</mat-card-title>
                 <form [formGroup]="interlinearGlossForm" class="gloss-form">
@@ -55,21 +55,35 @@
                         <input matInput formControlName="freeTranslation">
                         <mat-hint>Natural language translation</mat-hint>
                     </mat-form-field>
+
+                    <br><br>
+
+                    <mat-form-field>
+                        <mat-label>Font</mat-label>
+                        <mat-select formControlName="fontFace">
+                            <mat-option *ngFor="let font of this.fonts" [value]="font.value" >
+                                {{font.value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
         
                     <br><br>
+                    
                     <button mat-flat-button color="primary" (click)="submit()">Submit</button>
-                    <button mat-flat-button color="primary" (click)="clear()">Clear ILG</button>
                 </form>
             </mat-card>
         </div>
         
         <mat-card>
             <mat-card-title>Formatted interlinear gloss:</mat-card-title>
-            <table>
+            <table style="font-family: 'Courier New', Courier, monospace;">
                 <tr>
                     <td colspan="100">
                         <strong>{{this.interlinearGlossForm.value.sourceLanguage}}</strong> 
-                        ({{this.interlinearGlossForm.value.author}} {{this.interlinearGlossForm.value.year}}) </td>
+                        <span *ngIf="this.interlinearGlossForm.value.author || this.interlinearGlossForm.value.year">
+                            ({{this.interlinearGlossForm.value.author}} {{this.interlinearGlossForm.value.year}}) 
+                        </span>
+                    </td>
                 </tr>
                 <tr>
                     <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> 
@@ -82,7 +96,9 @@
                 </tr>
                 <tr>
                     <td colspan="100">
-                        "{{this.interlinearGlossForm.value.freeTranslation}}"
+                        <span *ngIf="this.interlinearGlossForm.value.freeTranslation">
+                            "{{this.interlinearGlossForm.value.freeTranslation}}"
+                        </span>
                     </td>
                 </tr>
             </table>
@@ -90,7 +106,7 @@
         </mat-card>
         <mat-card>
             <p>Recommended citation: </p>
-            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.2. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
+            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.3. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
         </mat-card>
     </mat-tab>
     <mat-tab label="Library">
@@ -98,8 +114,9 @@
             <mat-card-title>Glosses Created this Session:</mat-card-title>
             <table *ngFor="let ilg of ilgService.InterlinearGlossBank.getValue()">
                 <tr>
-                    <td colspan="{{ilg.phrases.length}}">
-                        <strong>{{ilg.language}}</strong> ({{ilg.datasetAuthor}} {{ilg.year}}) 
+                    <td colspan="100">
+                        <strong>{{ilg.language}} </strong> 
+                        <span *ngIf="ilg.author || ilg.year"> ({{ilg.author}} {{ilg.year}})</span>
                     </td>
                 </tr>
                 <tr *ngIf="ilg.phrases">
@@ -113,13 +130,15 @@
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="{{ilg.phrases.length}}">{{ilg.freeTranslation}}</td>
+                    <td colspan="100">
+                        <span *ngIf="ilg.freeTranslation">"{{ilg.freeTranslation}}"</span>
+                    </td>
                 </tr>
             </table>
         </mat-card>
         <mat-card>
             <p>Recommended citation: </p>
-            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em>[Computer software], v. 1.2. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
+            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.3. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
         </mat-card>
     </mat-tab>
 </mat-tab-group>
