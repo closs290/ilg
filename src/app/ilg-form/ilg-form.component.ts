@@ -1,10 +1,16 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+
+//RXJS
+import { Observable } from 'rxjs';
+import { filter, map, startWith } from 'rxjs/operators';
 
 // ILG App
 import { InterlinearGloss, ILGService } from '../ilg.service';
 import { FONTS } from './fonts';
+import { standardAbbreviation, LIST_OF_STANDARD_ABBREVIATIONS } from './glosses';
+import { punctuation, PUNCTUATION} from './punctuation';
 
 @Component({
   selector: 'app-ilg-form',
@@ -17,6 +23,8 @@ export class IlgFormComponent implements OnInit {
     ilgService: ILGService = new ILGService();
     currDate = new Date(Date.now());
     fonts = FONTS;
+    glossOptions: standardAbbreviation[] = LIST_OF_STANDARD_ABBREVIATIONS;
+    punctuationOptions: punctuation[] = PUNCTUATION;
 
     constructor(
         private formBuilder: FormBuilder
@@ -49,12 +57,6 @@ export class IlgFormComponent implements OnInit {
         this.addPair();
     }
 
-    clear(): void {
-        this.interlinearGlossForm.reset();
-        this.morphs().clear();
-        this.addPair();
-    }
-
     morphs(): FormArray {
         return this.interlinearGlossForm.get("morphemeGlossMap") as FormArray;
     }
@@ -66,7 +68,8 @@ export class IlgFormComponent implements OnInit {
     newMorphGlossPair(): FormGroup {
         return this.formBuilder.group({
             morph: '',
-            gloss: ''
+            gloss: '',
+            abbreviation: ''
         });
     }
 
