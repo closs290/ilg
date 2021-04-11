@@ -46,6 +46,12 @@ table {
                     max-width: 5em;
                     align-self: flex-end;
                 }
+                .abbreviation-field {
+                    font-variant: small-caps;
+                }
+                .abbrevation-option {
+                    font-variant: small-caps;
+                }
                 .add-morpheme {
                     margin-left: 1em;
                     margin-bottom: 2em;
@@ -61,13 +67,12 @@ table {
 }
 
 .morpheme {
-    min-width: fit-content;
+    min-width: 4em;
     padding: 0px;
-    //try flex-grow? flex-shrink?
 }
 
 .gloss {
-    max-width: 5em;
+    max-width: 8em;
     padding: 0px;
     //try flex-grow? flex-shrink?
 }
@@ -78,7 +83,15 @@ table {
 }
 
 .punctuation {
-    max-width: 1.5em;
+    max-width: 2em;
+
+    .mat-select-arrow {
+        display: none;
+    }
+    
+    .mat-select-arrow:hover {
+        display: block;
+    }
 }
 
 .small-caps {

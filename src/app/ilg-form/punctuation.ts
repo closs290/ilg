@@ -21,12 +21,24 @@ export const PUNCTUATION: punctuation[] = [
         meaning: 'clitic boundary'
     },
     {
+        grapheme: '~',
+        meaning: 'reduplication'
+    },
+    {
         grapheme: ':',
         meaning: 'segmentation not shown'
     },
     {
         grapheme: '\\',
         meaning: 'morphophonological grammatical property'
+    },
+    {
+        grapheme: '<',
+        meaning: 'infix start'
+    },
+    {
+        grapheme: '>',
+        meaning: 'infix end'
     },
     {
         grapheme: '>',
@@ -47,18 +59,6 @@ export const PUNCTUATION: punctuation[] = [
     {
         grapheme: ')',
         meaning: 'non-overt category end'
-    },
-    {
-        grapheme: '<',
-        meaning: 'infix start'
-    },
-    {
-        grapheme: '>',
-        meaning: 'infix end'
-    },
-    {
-        grapheme: '~',
-        meaning: 'reduplication'
     },
     {
         grapheme: ',',

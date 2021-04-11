@@ -24,7 +24,9 @@
                             <tr>
                                 <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
                                     <mat-form-field title="{{interlinearGlossForm.value.morphemeGlossMap[i].morph}}"
-                                                    appearance="outline" class="morpheme" id="morpheme{{i}}">
+                                                    appearance="outline" class="morpheme" id="morpheme{{i}}"
+                                                    [ngStyle]="{'max-width.em': (interlinearGlossForm.value.morphemeGlossMap[i].morph.length > 5) ? 
+                                                                (interlinearGlossForm.value.morphemeGlossMap[0].morph.length * .65) : 8 }">
                                         <mat-label>Morpheme</mat-label>
                                         <input matInput formControlName="morph"
                                                         type="text"
@@ -48,8 +50,10 @@
                                                         class="glosses" />
                                     </mat-form-field>
                                     <mat-form-field class="abbreviation">
-                                        <mat-select>
-                                            <mat-label>Gloss</mat-label>
+                                        <mat-label>Abbv</mat-label>
+                                        <mat-select formControlName="abbreviation" 
+                                                    title="Standard abbreviation for grammatical category"
+                                                    style="font-variant: small-caps;">
                                             <mat-option *ngFor="let gloss of glossOptions" [value]="gloss.abbreviation" >
                                                 <span style="font-variant: small-caps;"
                                                         title="{{gloss.full}}"
@@ -60,8 +64,7 @@
                                         </mat-select>
                                     </mat-form-field>
                                     <mat-form-field class="punctuation">
-                                        <mat-select>
-                                            <mat-label>Boundary</mat-label>
+                                        <mat-select title="Boundary punctuation">
                                             <mat-option *ngFor="let punct of punctuationOptions" [value]="punct.grapheme" >
                                                 <span title="{{punct.meaning}}">
                                                     {{punct.grapheme}}
@@ -115,8 +118,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> {{pair.gloss}}
+                    <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> 
+                        {{pair.gloss}}
+                        <span style="font-variant: small-caps;">
+                            {{pair.abbreviation}}
+                        </span>
                     </td>
+                    <!--Do something with small-caps abbr here-->
                 </tr>
                 <tr>
                     <td colspan="100">
@@ -152,8 +160,12 @@
                 <tr *ngIf="ilg.phrases">
                     <td *ngFor="let pair of ilg.phrases">
                         {{pair.gloss}}
+                        <span style="font-variant: small-caps;">
+                            {{pair.abbreviation}}
+                        </span>
                     </td>
                 </tr>
+                <!--Do something with small-caps abbr here-->
                 <tr>
                     <td colspan="100">
                         <span *ngIf="ilg.freeTranslation">"{{ilg.freeTranslation}}"</span>

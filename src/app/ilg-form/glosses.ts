@@ -17,327 +17,327 @@ export const LIST_OF_STANDARD_ABBREVIATIONS: standardAbbreviation[] = [
         full: 'third person'
     },
     {
-        abbreviation: 'A',
-        full: 'agent argument of transitive verb'
+        abbreviation: 'a',
+        full: 'agent argument'
     },
     {
-        abbreviation: 'ABL', 
+        abbreviation: 'abl', 
         full: 'ablative'
     }, 
     {
-        abbreviation: 'ABS',
+        abbreviation: 'abs',
         full: 'absolutive'
     },
     {
-        abbreviation: 'ACC',
+        abbreviation: 'acc',
         full: 'accusative'
     },
     {
-        abbreviation: 'ADJ', 
+        abbreviation: 'adj', 
         full: 'adjective'
     }, 
     {
-        abbreviation: 'ADV',
+        abbreviation: 'adv',
         full: 'adverb'
     },
     {
-        abbreviation: 'AGR',
+        abbreviation: 'agr',
         full: 'agreement'
     },
     {
-        abbreviation: 'ALL', 
+        abbreviation: 'all', 
         full: 'allative'
     }, 
     {
-        abbreviation: 'ANTIP',
+        abbreviation: 'antip',
         full: 'antipassive'
     },
     {
-        abbreviation: 'APPL',
+        abbreviation: 'appl',
         full: 'applicative'
     },
     {
-        abbreviation: 'ART',
+        abbreviation: 'art',
         full: 'article'
     },
     {
-        abbreviation: 'AUX', 
+        abbreviation: 'aux', 
         full: 'auxiliary'
     }, 
     {
-        abbreviation: 'BEN',
+        abbreviation: 'ben',
         full: 'benefactive'
     },
     {
-        abbreviation: 'CAUS',
+        abbreviation: 'caus',
         full: 'causative'
     },
     {
-        abbreviation: 'CLF', 
+        abbreviation: 'clf', 
         full: 'classifier'
     }, 
     {
-        abbreviation: 'COM',
+        abbreviation: 'com',
         full: 'comitative'
     },
     {
-        abbreviation: 'COMP',
+        abbreviation: 'comp',
         full: 'complementizer'
     },
     {
-        abbreviation: 'COMPL', 
+        abbreviation: 'compl', 
         full: 'completive'
     }, 
     {
-        abbreviation: 'COND',
+        abbreviation: 'cond',
         full: 'conditional'
     },
     {
-        abbreviation: 'COP', 
+        abbreviation: 'cop', 
         full: 'copula'
     }, 
     {
-        abbreviation: 'CVB',
+        abbreviation: 'cvb',
         full: 'converb'
     },
     {
-        abbreviation: 'DAT',
+        abbreviation: 'dat',
         full: 'dative'
     },
     {
-        abbreviation: 'DECL', 
+        abbreviation: 'decl', 
         full: 'declarative'
     }, 
     {
-        abbreviation: 'DEF',
+        abbreviation: 'def',
         full: 'definite'
     },
     {
-        abbreviation: 'DEM',
+        abbreviation: 'dem',
         full: 'demonstrative'
     },
     {
-        abbreviation: 'DET',
+        abbreviation: 'det',
         full: 'determiner'
     },
     {
-        abbreviation: 'DIST',
+        abbreviation: 'dist',
         full: 'distal'
     },
     {
-        abbreviation: 'DISTR',
+        abbreviation: 'distr',
         full: 'distributive'
     },
     {
-        abbreviation: 'DU',
+        abbreviation: 'du',
         full: 'dual'
     },
     {
-        abbreviation: 'DUR',
+        abbreviation: 'dur',
         full: 'durative'
     },
     {
-        abbreviation: 'ERG',
+        abbreviation: 'erg',
         full: 'ergative'
     },
     {
-        abbreviation: 'EXCL',
+        abbreviation: 'excl',
         full: 'exclusive'
     },
     {
-        abbreviation: 'F',
+        abbreviation: 'f',
         full: 'feminine'
     },
     {
-        abbreviation: 'FOC',
+        abbreviation: 'foc',
         full: 'focus'
     },
     {
-        abbreviation: 'FUT',
+        abbreviation: 'fut',
         full: 'future'
     },
     {
-        abbreviation: 'GEN',
+        abbreviation: 'gen',
         full: 'genitive'
     },
     {
-        abbreviation: 'IMP',
+        abbreviation: 'imp',
         full: 'imperative'
     },
     {
-        abbreviation: 'INCL',
+        abbreviation: 'incl',
         full: 'inclusive'
     },
     {
-        abbreviation: 'IND',
+        abbreviation: 'ind',
         full: 'indicative'
     },
     {
-        abbreviation: 'INDF',
+        abbreviation: 'indf',
         full: 'indefinite'
     },
     {
-        abbreviation: 'INF',
+        abbreviation: 'inf',
         full: 'infinitive'
     },
     {
-        abbreviation: 'INS',
+        abbreviation: 'ins',
         full: 'instrumental'
     },
     {
-        abbreviation: 'INTR',
+        abbreviation: 'intr',
         full: 'intransitive'
     },
     {
-        abbreviation: 'IPFV',
+        abbreviation: 'ipfv',
         full: 'imperfective'
     },
     {
-        abbreviation: 'IRR',
+        abbreviation: 'irr',
         full: 'irrealis'
     },
     {
-        abbreviation: 'LOC',
+        abbreviation: 'loc',
         full: 'locative'
     },
     {
-        abbreviation: 'M',
+        abbreviation: 'm',
         full: 'masculine'
     },
     {
-        abbreviation: 'N',
+        abbreviation: 'n',
         full: 'neuter'
     },
     {
-        abbreviation: 'N-',
+        abbreviation: 'n-',
         full: 'non-'
     },
     {
-        abbreviation: 'NEG',
+        abbreviation: 'neg',
         full: 'negative'
     },
     {
-        abbreviation: 'NMLZ',
+        abbreviation: 'nmlz',
         full: 'nominalizer'
     },
     {
-        abbreviation: 'NOM',
+        abbreviation: 'nom',
         full: 'nominative'
     },
     {
-        abbreviation: 'OBJ',
+        abbreviation: 'obj',
         full: 'object'
     },
     {
-        abbreviation: 'OBL',
+        abbreviation: 'obl',
         full: 'oblique'
     },
     {
-        abbreviation: 'P',
+        abbreviation: 'p',
         full: 'patient'
     },
     {
-        abbreviation: 'PASS',
+        abbreviation: 'pass',
         full: 'passive'
     },
     {
-        abbreviation: 'PFV',
+        abbreviation: 'pfv',
         full: 'perfective'
     },
     {
-        abbreviation: 'PL',
+        abbreviation: 'pl',
         full: 'plural'
     },
     {
-        abbreviation: 'POSS',
+        abbreviation: 'poss',
         full: 'possessive'
     },
     {
-        abbreviation: 'PRED',
+        abbreviation: 'pred',
         full: 'predicative'
     },
     {
-        abbreviation: 'PRF',
+        abbreviation: 'prf',
         full: 'perfect'
     },
     {
-        abbreviation: 'PRS',
+        abbreviation: 'prs',
         full: 'present'
     },
     {
-        abbreviation: 'PROG',
+        abbreviation: 'prog',
         full: 'progressive'
     },
     {
-        abbreviation: 'PROH',
+        abbreviation: 'proh',
         full: 'prohibitive'
     },
     {
-        abbreviation: 'PROX',
+        abbreviation: 'prox',
         full: 'proximal'
     },
     {
-        abbreviation: 'PST',
+        abbreviation: 'pst',
         full: 'past'
     },
     {
-        abbreviation: 'PTCP',
+        abbreviation: 'ptcp',
         full: 'participle'
     },
     {
-        abbreviation: 'PURP',
+        abbreviation: 'purp',
         full: 'purposive'
     },
     {
-        abbreviation: 'Q',
+        abbreviation: 'q',
         full: 'question particle'
     }, 
     {
-        abbreviation: 'QUOT',
+        abbreviation: 'quot',
         full: 'quotative'
     },
     {
-        abbreviation: 'RECP',
+        abbreviation: 'recp',
         full: 'reciprocal'
     },
     {
-        abbreviation: 'REFL',
+        abbreviation: 'refl',
         full: 'reflexive'
     },
     {
-        abbreviation: 'REL',
+        abbreviation: 'rel',
         full: 'relative'
     },
     {
-        abbreviation: 'RES',
+        abbreviation: 'res',
         full: 'resultative'
     },
     {
-        abbreviation: 'S',
+        abbreviation: 's',
         full: 'single argument'
     },
     {
-        abbreviation: 'SBJ',
+        abbreviation: 'sbj',
         full: 'subject'
     },
     {
-        abbreviation: 'SBJV',
+        abbreviation: 'sbjv',
         full: 'subjunctive'
     },
     {
-        abbreviation: 'SG',
+        abbreviation: 'sg',
         full: 'singular'
     },
     {
-        abbreviation: 'TOP',
+        abbreviation: 'top',
         full: 'topic'
     },
     {
-        abbreviation: 'TR',
+        abbreviation: 'tr',
         full: 'transitive'
     },
     {
-        abbreviation: 'VOC',
+        abbreviation: 'voc',
         full: 'vocative'
     }
 ];
