@@ -7,6 +7,10 @@ table {
     margin-right: 5px;
 }
 
+.toggle-ortho {
+    margin-right: 1em;
+}
+
 .flex-container {
     display: flex;
     align-content: stretch;
@@ -34,7 +38,7 @@ table {
 
             .morpheme-gloss-pairs {
 
-                max-width: calc(80%);
+                max-width: calc(90%);
                 overflow-x: auto;
 
                 .morphs {

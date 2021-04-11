@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
 
+import { BehaviorSubject } from 'rxjs';
+
 // ILG App
 import { InterlinearGloss, ILGService } from '../ilg.service';
 import { FONTS } from './fonts';
@@ -17,10 +19,11 @@ export class IlgFormComponent implements OnInit {
 
     interlinearGlossForm: FormGroup;
     ilgService: ILGService = new ILGService();
-    currDate = new Date(Date.now());
-    fonts = FONTS;
+    showOrthography = new BehaviorSubject<Boolean>(false);
     glossOptions: standardAbbreviation[] = LIST_OF_STANDARD_ABBREVIATIONS;
     punctuationOptions: punctuation[] = PUNCTUATION;
+    fonts = FONTS;
+    currDate = new Date(Date.now());
 
     constructor(
         private formBuilder: FormBuilder
@@ -39,6 +42,14 @@ export class IlgFormComponent implements OnInit {
         this.addPair();
     }
 
+    toggleOrthoLayer() {
+        this.showOrthography.next(!this.showOrthography.value);
+    }
+
+    addPair(): void {
+        this.morphs().push(this.newMorphGlossPair());
+    }
+
     submit() {
         const newIlg = {
             language: this.interlinearGlossForm.value.sourceLanguage, 
@@ -55,11 +66,7 @@ export class IlgFormComponent implements OnInit {
 
     morphs(): FormArray {
         return this.interlinearGlossForm.get("morphemeGlossMap") as FormArray;
-    }
-
-    addPair(): void {
-        this.morphs().push(this.newMorphGlossPair());
-    }
+    }    
 
     newMorphGlossPair(): FormGroup {
         return this.formBuilder.group({
