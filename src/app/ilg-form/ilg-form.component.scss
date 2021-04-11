@@ -72,8 +72,9 @@ table {
 }
 
 .gloss {
-    max-width: 8em;
+    max-width: 7em;
     padding: 0px;
+    padding-right: 1em;
     //try flex-grow? flex-shrink?
 }
 

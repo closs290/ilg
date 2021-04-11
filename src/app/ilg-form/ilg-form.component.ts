@@ -2,10 +2,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
 
-//RXJS
-import { Observable } from 'rxjs';
-import { filter, map, startWith } from 'rxjs/operators';
-
 // ILG App
 import { InterlinearGloss, ILGService } from '../ilg.service';
 import { FONTS } from './fonts';
