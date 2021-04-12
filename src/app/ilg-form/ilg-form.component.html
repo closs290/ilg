@@ -132,6 +132,11 @@
                         </span>
                     </td>
                 </tr>
+                <tr *ngIf="showOrthography.value">
+                    <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> 
+                        <em>{{pair.orthography}} </em> 
+                    </td>
+                </tr>
                 <tr>
                     <td *ngFor="let pair of this.interlinearGlossForm.value.morphemeGlossMap"> 
                         <em>{{pair.morph}} </em> 
@@ -158,7 +163,7 @@
         </mat-card>
         <mat-card>
             <p>Recommended citation: </p>
-            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.4. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
+            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
         </mat-card>
     </mat-tab>
     <mat-tab label="Library">
@@ -170,6 +175,11 @@
                     <td colspan="100">
                         <strong>{{ilg.language}} </strong> 
                         <span *ngIf="ilg.author || ilg.year"> ({{ilg.author}} {{ilg.year}})</span>
+                    </td>
+                </tr>
+                <tr *ngIf="ilg.phrases && this.showOrthography">
+                    <td *ngFor="let pair of ilg.phrases">
+                        <em>{{pair.orthography}}</em>
                     </td>
                 </tr>
                 <tr *ngIf="ilg.phrases">
@@ -196,7 +206,7 @@
             <p>Current font: {{this.interlinearGlossForm.value.fontForm}}</p>
             <p><strong>Recommended citation: </strong></p>
             <p [style.font-family]="this.interlinearGlossForm.value.fontForm">
-                Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.4. Retrieved {{currDate | date}}, from http://ilg.closson.tech
+                Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5. Retrieved {{currDate | date}}, from http://ilg.closson.tech
             </p>
         </mat-card>
     </mat-tab>

@@ -1,6 +1,6 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 
 import { BehaviorSubject } from 'rxjs';
 
@@ -70,6 +70,7 @@ export class IlgFormComponent implements OnInit {
 
     newMorphGlossPair(): FormGroup {
         return this.formBuilder.group({
+            orthography: '',
             morph: '',
             gloss: '',
             abbreviation: ''
