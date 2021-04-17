@@ -77,4 +77,27 @@ export class IlgFormComponent implements OnInit {
         });
     }
 
+    // currently does not work
+    copyTable() {
+        let copiedILG = document.createElement("table");
+        let titleRow = document.createElement("tr");
+        let titleText = document.createElement("td");
+        let langAuthorYearPage = document.createTextNode(
+            "<strong>" + this.interlinearGlossForm.value.sourceLanguage +
+            "</strong> (" + this.interlinearGlossForm.value.author + ", " +
+            this.interlinearGlossForm.value.year + ")");
+        titleText.appendChild(langAuthorYearPage);
+        titleRow.appendChild(titleText);
+        copiedILG.appendChild(titleRow);
+
+        copiedILG.style.position = "absolute";
+        copiedILG.style.top = "0px";
+        copiedILG.style.left = "0px";
+        copiedILG.style.zIndex = "-1";
+
+        copiedILG.focus();
+        // copiedILG.select();
+        document.execCommand("copy");
+    }
+
 }

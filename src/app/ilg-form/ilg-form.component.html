@@ -123,7 +123,9 @@
         
         <mat-card>
             <mat-card-title>Formatted interlinear gloss:</mat-card-title>
-            <table [style.font-family]="this.interlinearGlossForm.value.fontForm">
+            <!-- TODO: Make copy button Materials, and work on placement. Really shouldn't be button, should be icon.  -->
+            <button (click)="copyTable()">Copy</button>
+            <table [style.font-family]="this.interlinearGlossForm.value.fontForm" id="preview">
                 <tr>
                     <td colspan="100">
                         <strong>{{this.interlinearGlossForm.value.sourceLanguage}}</strong> 
@@ -149,7 +151,6 @@
                             {{pair.abbreviation}}
                         </span>
                     </td>
-                    <!--Do something with small-caps abbr here-->
                 </tr>
                 <tr>
                     <td colspan="100">
@@ -163,7 +164,7 @@
         </mat-card>
         <mat-card>
             <p>Recommended citation: </p>
-            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5. Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
+            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5.1 Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
         </mat-card>
     </mat-tab>
     <mat-tab label="Library">
@@ -206,7 +207,7 @@
             <p>Current font: {{this.interlinearGlossForm.value.fontForm}}</p>
             <p><strong>Recommended citation: </strong></p>
             <p [style.font-family]="this.interlinearGlossForm.value.fontForm">
-                Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5. Retrieved {{currDate | date}}, from http://ilg.closson.tech
+                Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5.1 Retrieved {{currDate | date}}, from http://ilg.closson.tech
             </p>
         </mat-card>
     </mat-tab>
