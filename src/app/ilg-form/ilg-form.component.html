@@ -124,7 +124,7 @@
         <mat-card>
             <mat-card-title>Formatted interlinear gloss:</mat-card-title>
             <!-- TODO: Make copy button Materials, and work on placement. Really shouldn't be button, should be icon.  -->
-            <button (click)="copyTable()">Copy</button>
+            <!-- <button mat-icon-button (click)="copyTable()"><mat-icon>content_copy</mat-icon></button> -->
             <table [style.font-family]="this.interlinearGlossForm.value.fontForm" id="preview">
                 <tr>
                     <td colspan="100">
@@ -164,7 +164,7 @@
         </mat-card>
         <mat-card>
             <p>Recommended citation: </p>
-            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5.1 Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
+            <p>Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5.2 Retrieved {{currDate | date}}, from http://ilg.closson.tech</p>
         </mat-card>
     </mat-tab>
     <mat-tab label="Library">
@@ -207,7 +207,7 @@
             <p>Current font: {{this.interlinearGlossForm.value.fontForm}}</p>
             <p><strong>Recommended citation: </strong></p>
             <p [style.font-family]="this.interlinearGlossForm.value.fontForm">
-                Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5.1 Retrieved {{currDate | date}}, from http://ilg.closson.tech
+                Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.5.2 Retrieved {{currDate | date}}, from http://ilg.closson.tech
             </p>
         </mat-card>
     </mat-tab>
