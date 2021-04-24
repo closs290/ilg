@@ -5,6 +5,10 @@ export interface standardAbbreviation {
 
 export const LIST_OF_STANDARD_ABBREVIATIONS: standardAbbreviation[] = [
     {
+        abbreviation: '',
+        full: ''
+    },
+    {
         abbreviation: '1',
         full: 'first person'
     },
