@@ -20,14 +20,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IlgFormComponent } from './ilg-form/ilg-form.component';
 import { KeysPipe } from './ilg-form/keys.pipe';
-import { CharacterListComponent } from './character-list/character-list.component';
+import { DatabaseListComponent } from './database-list/database-list.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         IlgFormComponent,
         KeysPipe,
-        CharacterListComponent
+        DatabaseListComponent
     ],
     imports: [
         HttpClientModule,

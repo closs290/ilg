@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { first } from 'rxjs/operators';
 
 // ILG App
@@ -18,6 +18,8 @@ import { FONTS } from './fonts';
 export class IlgFormComponent implements OnInit {
 
     ILGList$: Observable<ILGModel[]>;
+    TempILGList$: Observable<ILGModel[]>;
+    showOrthography = new BehaviorSubject<Boolean>(false);
     interlinearGlossForm: FormGroup;
     currDate = new Date(Date.now());
     fonts = FONTS;
@@ -41,6 +43,17 @@ export class IlgFormComponent implements OnInit {
     ngOnInit(): void {
         this.addPair();
         this.ILGList$ = this.ilgService.listAllCharacters();
+        this.TempILGList$ = this.ilgService.tempList();
+    }
+
+    toggleOrthoLayer() {
+        this.showOrthography.next(!this.showOrthography.value);
+        // TODO: Clear orthography layer when toggled off.
+        // if (!this.showOrthography.value) {
+        //     this.interlinearGlossForm.value.morphemeGlossMap.array.forEach(element => {
+        //         element.orthography = '';
+        //     });
+        // }
     }
 
     submit() {
@@ -91,8 +104,10 @@ export class IlgFormComponent implements OnInit {
 
     newMorphGlossPair(): FormGroup {
         return this.formBuilder.group({
+            orthography: '',
             morph: '',
-            gloss: ''
+            gloss: '',
+            abbreviation: ''
         });
     }
 

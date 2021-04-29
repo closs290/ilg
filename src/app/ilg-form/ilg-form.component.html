@@ -21,6 +21,16 @@
         
                     <div class="morpheme-gloss-pairs">
                         <table formArrayName="morphemeGlossMap">
+                            <tr *ngIf="showOrthography.value">
+                                <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
+                                    <mat-form-field appearance="outline" class="ortho" id="ortho{{i}}">
+                                        <input matInput formControlName="orthography"
+                                                        type="text"
+                                                        class="ortho"/>
+                                        <mat-hint *ngIf="i===0">Orthography </mat-hint>
+                                    </mat-form-field>
+                                </td>
+                            </tr>
                             <tr>
                                 <td *ngFor="let morph of morphs().controls; let i=index" [formGroupName]="i">
                                     <mat-form-field appearance="outline" class="morpheme" id="morpheme{{i}}">
@@ -56,7 +66,12 @@
                     </mat-form-field>
 
                     <br><br>
-
+                    <button mat-stroked-button color="primary" 
+                            class="toggle-ortho"
+                            title="Toggle orthography layer" 
+                            (click)="toggleOrthoLayer()">
+                        Orthography Layer
+                    </button>
                     <mat-form-field>
                         <mat-label>Font</mat-label>
                         <mat-select formControlName="fontForm">
@@ -68,8 +83,9 @@
         
                     <br><br>
                     
-                    <button mat-flat-button color="primary" (click)="submit()">Submit</button>
-                    <button mat-flat-button color="primary" (click)="sendILGToDB()">Submit to DB</button>
+                    <button mat-flat-button color="primary" (click)="submit()">Submit to Temp Library</button>
+                    <button mat-flat-button color="primary" (click)="sendILGToDB()">Submit to Permanent DB</button>
+                    <button mat-flat-button color="primary" (click)="viewDB()">View DB</button>
                 </form>
             </mat-card>
         </div>
@@ -112,7 +128,7 @@
     <mat-tab label="Library">
         <mat-card class="gloss-library-card">
             <mat-card-title>Glosses Created this Session:</mat-card-title>
-            <table *ngFor="let ilg of (ILGList$ | async)"
+            <table *ngFor="let ilg of (TempILGList$ | async)"
                     [style.font-family]="this.interlinearGlossForm.value.fontForm">
                 <tr>
                     <td colspan="100">

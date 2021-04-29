@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { IlgFormComponent } from './ilg-form/ilg-form.component';
-import { CharacterListComponent } from './character-list/character-list.component';
+import { DatabaseListComponent } from './database-list/database-list.component';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
   },
   {
     path: 'list',
-    component: CharacterListComponent
+    component: DatabaseListComponent
   }
 ];
 

@@ -25,8 +25,8 @@ export const defaultCallback = (req: any, res: any) => (
   };
   
   export const getILG = (req: any, res: any) => {
-    console.log("Looking for ILG: " + req.params.characterId);
-    ILGs.findById(req.params.characterId, defaultCallback(req, res));
+    console.log("Looking for ILG: " + req.params.IlgId);
+    ILGs.findById(req.params.IlgId, defaultCallback(req, res));
   };
   
   export const createILG = (req: any, res: any) => {
@@ -54,16 +54,16 @@ export const defaultCallback = (req: any, res: any) => (
     }
     
     ILGs.findOneAndUpdate(
-      { _id: req.params.characterId },
+      { _id: req.params.IlgId },
       charToUpdate,
       defaultCallback(req, res)
     );
   };
   
   export const deleteILG = (req: any, res: any) => {
-    console.log("Trying to delete: " + req.params.characterId);
+    console.log("Trying to delete: " + req.params.IlgId);
     ILGs.deleteOne(
-      {_id: req.params.characterId},
+      {_id: req.params.IlgId},
       optsCallback(req, res)({msg: "Deleted successfully"})
     );
   };

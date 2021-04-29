@@ -30,6 +30,10 @@ export class ILGService {
     public router: Router
   ) { }
 
+  tempList() {
+    return this.InterlinearGlossBank;
+  }
+
   listAllCharacters(): Observable<ILGModel[]> {
     return this.httpClient.get<ILGModel[]>(`${this.API_URL}/ilgs/`);
   }

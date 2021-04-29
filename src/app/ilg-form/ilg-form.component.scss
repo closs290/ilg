@@ -7,6 +7,10 @@ table {
     margin-right: 5px;
 }
 
+.toggle-ortho {
+    margin-right: 1em;
+}
+
 .flex-container {
     display: flex;
     align-content: stretch;
@@ -46,6 +50,12 @@ table {
                     max-width: 5em;
                     align-self: flex-end;
                 }
+                .abbreviation-field {
+                    font-variant: small-caps;
+                }
+                .abbrevation-option {
+                    font-variant: small-caps;
+                }
                 .add-morpheme {
                     margin-left: 1em;
                     margin-bottom: 2em;
@@ -68,6 +78,10 @@ table {
 .gloss {
     max-width: 5em;
     padding: 0px;
+}
+
+.abbreviation {
+    max-width: 4em;
 }
 
 .small-caps {

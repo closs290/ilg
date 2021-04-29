@@ -1,0 +1,53 @@
+<!-- <mat-form-field>
+    <mat-label>Font</mat-label>
+    <mat-select form="thisFont">
+        <mat-option *ngFor="let font of this.fonts" [value]="font.value" >
+            {{font.value}}
+        </mat-option>
+    </mat-select>
+</mat-form-field> -->
+
+<div *ngIf="ILGList$ | async as ilgs" [style.font-family]="this.fontForm.value.thisFont">
+    <table *ngFor="let ilg of (ILGList$ | async)"
+        class="final-row">
+        <tr>
+            <td colspan="100">
+                <strong>{{ilg.language}} </strong> 
+                <span *ngIf="ilg.author || ilg.year"> ({{ilg.author}} {{ilg.year}})</span>
+            </td>
+        </tr>
+        <tr *ngIf="ilg.phrases">
+            <td *ngFor="let pair of ilg.phrases">
+                <em>{{pair.morph}}</em>
+            </td>
+        </tr>
+        <tr *ngIf="ilg.phrases">
+            <td *ngFor="let pair of ilg.phrases">
+                {{pair.gloss}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="100">
+                <span *ngIf="ilg.freeTranslation">"{{ilg.freeTranslation}}"</span>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button (click)="deleteCharacter(ilg._id)">Delete</button>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="roll-buttons">
+    <button mat-flat-button color="primary"
+        (click)="goHome()">
+        Home
+    </button>
+</div>
+
+<p>Current font: {{this.fontForm.value.thisFont}}</p>
+<p><strong>Recommended citation: </strong></p>
+<p [style.font-family]="this.fontForm.value.thisFont">
+    Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.3. Retrieved {{currDate | date}}, from http://ilg.closson.tech
+</p>
