@@ -3,10 +3,8 @@ import express = require('express');
 import bodyParser = require('body-parser');
 import cors = require('cors');
 
+import { databaseName } from './environment';
 import { ilgRoutes } from './routes/ilg.routes';
-
-const databaseName = 'mongodb://localhost:27017/characters'; 
-// might need to be: mongodb://localhost:27017/interlinear-gloss-library
 
 const app = express();
 
@@ -42,7 +40,7 @@ db.once('open', () => {
 // Body Parser Middleware
 app.use(bodyParser.json());
 
-app.use('/interlinear-gloss-library', ilgRoutes);
+app.use('/ilgs', ilgRoutes);
 
 // Start Server
 app.listen(port, () => {
