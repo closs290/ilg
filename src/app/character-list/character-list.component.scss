@@ -1,0 +1,55 @@
+.character-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+
+    .page-content {
+        justify-content: center;
+
+        .new-character-button {
+            align-items: center;
+        }
+    }
+
+    .individual-character {
+        display: flex;
+        flex-direction: column;
+        align-self: center;
+        padding: 20px;
+        border-radius: 8px;
+        border-style: solid;
+        margin-left: 4em;
+        margin-right: 4em;
+        margin-top: 1em;
+
+        button {
+            margin-top: 2em;
+        }
+    }
+
+    
+
+    button {
+        align-self: center;
+        border-radius: 3px;
+    
+        &:hover {
+            box-shadow: 0 0 0 2px red;
+          }
+    }
+}
+
+.roll-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1em;
+
+    button {
+        margin: 1em;
+    }
+}
+

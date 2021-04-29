@@ -69,6 +69,7 @@
                     <br><br>
                     
                     <button mat-flat-button color="primary" (click)="submit()">Submit</button>
+                    <button mat-flat-button color="primary" (click)="sendILGToDB()">Submit to DB</button>
                 </form>
             </mat-card>
         </div>
@@ -111,7 +112,7 @@
     <mat-tab label="Library">
         <mat-card class="gloss-library-card">
             <mat-card-title>Glosses Created this Session:</mat-card-title>
-            <table *ngFor="let ilg of ilgService.InterlinearGlossBank.getValue()"
+            <table *ngFor="let ilg of (ILGList$ | async)"
                     [style.font-family]="this.interlinearGlossForm.value.fontForm">
                 <tr>
                     <td colspan="100">
@@ -143,6 +144,7 @@
                 Closson, Reuben M. (2021). <em>Interliner Gloss Creator Web App</em> [Computer software], v. 1.3. Retrieved {{currDate | date}}, from http://ilg.closson.tech
             </p>
         </mat-card>
+        <button mat-flat-button color="primary" (click)="viewDB()">View DB</button>
     </mat-tab>
 </mat-tab-group>
 

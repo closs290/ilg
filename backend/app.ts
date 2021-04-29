@@ -1,7 +1,9 @@
-import * as mongoose from 'mongoose';
-import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import * as cors from 'cors';
+import mongoose = require('mongoose');
+import express = require('express');
+import bodyParser = require('body-parser');
+import cors = require('cors');
+
+import { ilgRoutes } from './routes/ilg.routes';
 
 const databaseName = 'mongodb://localhost:27017/characters'; 
 // might need to be: mongodb://localhost:27017/interlinear-gloss-library
@@ -39,8 +41,6 @@ db.once('open', () => {
 
 // Body Parser Middleware
 app.use(bodyParser.json());
-
-const ilgRoutes = []; // These needs updated before anything will work
 
 app.use('/interlinear-gloss-library', ilgRoutes);
 

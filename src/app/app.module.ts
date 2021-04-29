@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 // Materials
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -18,14 +20,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IlgFormComponent } from './ilg-form/ilg-form.component';
 import { KeysPipe } from './ilg-form/keys.pipe';
+import { CharacterListComponent } from './character-list/character-list.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         IlgFormComponent,
-        KeysPipe
+        KeysPipe,
+        CharacterListComponent
     ],
     imports: [
+        HttpClientModule,
+        RouterModule,
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,

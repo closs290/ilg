@@ -1,0 +1,21 @@
+<div class="character-list">
+    <div class="page-content">
+        <div *ngIf="ILGList$ | async as ilgs">
+            <div class="characterList">
+                <span class="individual-character" *ngFor="let ilg of ilgs">
+                    <p>{{ilg.language}}</p>
+                    <button (click)="deleteCharacter(ilg._id)">Delete</button>
+                </span>
+            </div>    
+        </div>
+        
+        <div class="roll-buttons">
+            <button type="button"
+                (click)="goHome()"
+                class="new-character-button">
+                Home
+            </button>
+        </div>
+        
+    </div>
+</div>

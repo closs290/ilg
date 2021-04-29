@@ -1,9 +1,13 @@
 // Angular
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, ReactiveFormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { first } from 'rxjs/operators';
 
 // ILG App
-import { InterlinearGloss, ILGService } from '../ilg.service';
+import { ILGService } from '../ilg.service';
+import { ILGModel } from '../../../backend/models/ilg.model';
 import { FONTS } from './fonts';
 
 @Component({
@@ -13,13 +17,16 @@ import { FONTS } from './fonts';
 })
 export class IlgFormComponent implements OnInit {
 
+    ILGList$: Observable<ILGModel[]>;
     interlinearGlossForm: FormGroup;
-    ilgService: ILGService = new ILGService();
     currDate = new Date(Date.now());
     fonts = FONTS;
+    error: string;
 
     constructor(
-        private formBuilder: FormBuilder
+        private ilgService: ILGService,
+        private formBuilder: FormBuilder,
+        private router: Router
     ) { 
         this.interlinearGlossForm = this.formBuilder.group({
             fontForm: '',
@@ -33,6 +40,7 @@ export class IlgFormComponent implements OnInit {
 
     ngOnInit(): void {
         this.addPair();
+        this.ILGList$ = this.ilgService.listAllCharacters();
     }
 
     submit() {
@@ -42,11 +50,29 @@ export class IlgFormComponent implements OnInit {
             year: this.interlinearGlossForm.value.year,
             phrases: this.interlinearGlossForm.value.morphemeGlossMap,
             freeTranslation: this.interlinearGlossForm.value.freeTranslation
-        } as InterlinearGloss;
+        } as ILGModel;
         this.ilgService.InterlinearGlossBank.next([...this.ilgService.InterlinearGlossBank.value, newIlg]);
         this.interlinearGlossForm.get('freeTranslation').reset();
         this.morphs().clear();
         this.addPair();
+    }
+
+    sendILGToDB() {
+        this.ilgService.postNewCharacter({
+            language: this.interlinearGlossForm.value.sourceLanguage, 
+            author: this.interlinearGlossForm.value.author,
+            year: this.interlinearGlossForm.value.year,
+            phrases: this.interlinearGlossForm.value.morphemeGlossMap,
+            freeTranslation: this.interlinearGlossForm.value.freeTranslation
+        } as ILGModel ).pipe(first())
+        .subscribe( // Note the subscription on the service post here.
+          data => {
+            window.alert('This was submitted publically, for all to see');
+          },
+          error => {
+            this.error = error;
+          }
+        );
     }
 
     clear(): void {
@@ -68,6 +94,10 @@ export class IlgFormComponent implements OnInit {
             morph: '',
             gloss: ''
         });
+    }
+
+    viewDB() {
+        this.router.navigate(['/list']);
     }
 
 }

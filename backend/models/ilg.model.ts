@@ -1,14 +1,14 @@
-import { model, Schema, Document } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-export interface interlinearGloss extends Document {
+export interface ILGModel {
     language: string;
     author: string;
     year: string;
     phrases: [];
     freeTranslation: string;
 }
-
-export const ILGSchema = new Schema<interlinearGloss>({
+  
+export const ILGSchema = new Schema<ILGModel>({
     language: {
         type: String
     }, 
@@ -25,12 +25,5 @@ export const ILGSchema = new Schema<interlinearGloss>({
         type: String
     }
 });
-
-export interface phrase {
-    orthography?: string;
-    morph: string;
-    gloss: string;
-    abbreviation?: string
-}
-
+  
 export const ILGs = model('ILG', ILGSchema);
