@@ -25,6 +25,7 @@
     "@ngrx/entity": "^10.1.2",
     "@ngrx/store": "^10.1.2",
     "express": "^4.17.1",
+    "mongoose": "^5.7.14",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.3"
@@ -49,7 +50,7 @@
     "typescript": "~4.1.2"
   },
   "description": "A web application for creating and formatting interlinear glosses (interlinear text translations)",
-  "keywords":[
+  "keywords": [
     "linguistics",
     "interlinear gloss",
     "interlinear text",
