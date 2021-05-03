@@ -8,8 +8,9 @@ const environment_1 = require("./environment");
 const ilg_routes_1 = require("./routes/ilg.routes");
 const app = express();
 // CORS Middleware
+// TODO: Add 8080, 4200 and other ports I tend to test with
 const corsOptions = {
-    origin: 'http://localhost:8080',
+    origin: 'http://ilg.ngrok.io',
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));

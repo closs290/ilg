@@ -18,8 +18,8 @@ exports.getAllILGs = (req, res) => {
     ilg_model_1.ILGs.find({}, exports.defaultCallback(req, res));
 };
 exports.getILG = (req, res) => {
-    console.log("Looking for ILG: " + req.params.characterId);
-    ilg_model_1.ILGs.findById(req.params.characterId, exports.defaultCallback(req, res));
+    console.log("Looking for ILG: " + req.params.IlgId);
+    ilg_model_1.ILGs.findById(req.params.IlgId, exports.defaultCallback(req, res));
 };
 exports.createILG = (req, res) => {
     console.log("Creating " + req.body.characterName);
@@ -41,9 +41,9 @@ exports.updateILG = (req, res) => {
         phrases: req.body.phrases,
         freeTranslation: req.body.freeTranslation
     };
-    ilg_model_1.ILGs.findOneAndUpdate({ _id: req.params.characterId }, charToUpdate, exports.defaultCallback(req, res));
+    ilg_model_1.ILGs.findOneAndUpdate({ _id: req.params.IlgId }, charToUpdate, exports.defaultCallback(req, res));
 };
 exports.deleteILG = (req, res) => {
-    console.log("Trying to delete: " + req.params.characterId);
-    ilg_model_1.ILGs.deleteOne({ _id: req.params.characterId }, exports.optsCallback(req, res)({ msg: "Deleted successfully" }));
+    console.log("Trying to delete: " + req.params.IlgId);
+    ilg_model_1.ILGs.deleteOne({ _id: req.params.IlgId }, exports.optsCallback(req, res)({ msg: "Deleted successfully" }));
 };
